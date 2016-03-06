@@ -15,6 +15,10 @@ public class AdminRepository {
 	@Autowired
 	NamedParameterJdbcTemplate namedParameterTemplate;
 	
+	private static final String UPDATE_ADMIN_RECORDS = 
+			"UPDATE Admins SET insertDate=:insertDate,firstName=:fName,middleName=:mName,lastName=:lName,telephoneNumber=:phone1,"
+			+ "otherPhone=:phone2,mailAddr=:address,emailAddress=:email,password=:pwd,question=:question,answer=:answer where adminId = :adminId";
+			
 	
 	private static final String INSERT_ADMIN_RECORDS = 
 			"INSERT INTO Admins(firstName, middleName, lastName, emailAddress, password, telephoneNumber, otherPhone, mailAddr, question, answer, insertDate)"
@@ -37,5 +41,24 @@ public class AdminRepository {
 		
 		
 		namedParameterTemplate.update(INSERT_ADMIN_RECORDS, paramMap);
+	}
+	
+	public void updateAdmin(Admin admin){
+		
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("firstName", admin.getFirstName());
+		paramMap.put("middleName", admin.getMiddleName());
+		paramMap.put("lastName", admin.getLastName());
+		paramMap.put("email", admin.getEmail());
+		paramMap.put("password", admin.getPassword());
+		paramMap.put("phone1", admin.getPhone());
+		paramMap.put("phone2", admin.getOtherPhone());
+		paramMap.put("insertDate", admin.getInsertDate());
+		paramMap.put("address", admin.getAddress());
+		paramMap.put("question", admin.getSecQuest());
+		paramMap.put("answer", admin.getSecAns());
+		
+		
+		namedParameterTemplate.update(UPDATE_ADMIN_RECORDS, paramMap);
 	}
 }

@@ -1,6 +1,5 @@
 package com.restaurant.services.dao.controller;
 
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.services.dao.AdminRepository;
@@ -33,18 +31,18 @@ public class RestaurantRestWSController {
 	AdminRepository adminRepository;
 	
 
-	@RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "application/json")
-	public Customer ping() {
-
-		Customer customer = new Customer();
-		customer.setFirstName("Subhash");
-		customer.setLastName("Koganti123");
-		customer.setInsertDate(new Date());
-		System.out.println("Subhash is testing REST Service ping");
-		// customerRepository.registerCustomer(customer);
-
-		return customer;
-	}
+//	@RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "application/json")
+//	public Customer ping() {
+//
+//		Customer customer = new Customer();
+//		customer.setFirstName("Subhash");
+//		customer.setLastName("Koganti123");
+//		customer.setInsertDate(new Date());
+//		System.out.println("Subhash is testing REST Service ping");
+//		// customerRepository.registerCustomer(customer);
+//
+//		return customer;
+//	}
 
 	@RequestMapping(value = "/signUpCustomer", method = RequestMethod.POST)
 	public ResponseEntity<String> registerCust(@RequestBody Customer cust) {
@@ -97,4 +95,16 @@ public class RestaurantRestWSController {
 	return new ResponseEntity<String>(adminInsertStatus, HttpStatus.OK);
 	}
 
+	
+	@RequestMapping(value = "/updateAdminProfile", method = RequestMethod.POST)
+	public ResponseEntity<String> updateAdmin(@RequestBody Admin admin) {
+		String adminInsertStatus = "Admin Regitration Success! Please Login";
+		try {
+			adminRepository.updateAdmin(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+			adminInsertStatus = "Admin Regitration Failed";
+		}
+	return new ResponseEntity<String>(adminInsertStatus, HttpStatus.OK);
+	}
 }
