@@ -17,8 +17,10 @@ public class CustomerRepository {
 	
 	
 	private static final String INSERT_CUSTOMER_RECORDS = 
-			"INSERT INTO Customers(firstName, middleName, lastName, emailAddress, password, promoCode, adChannel, insertDate) "
-			+ "VALUES (:firstName,:middleName,:lastName,:email,:password,:promoCode,:adChannel,:insertDate)";
+			"INSERT INTO Customers(firstName, middleName, lastName, emailAddress, password, promoCode, adChannel, insertDate, "
+			+ "telephoneNumber, addrStNum, city, state, zip) "
+			+ "VALUES (:firstName,:middleName,:lastName,:email,:password,:promoCode,:adChannel,:insertDate,"
+			+ ":phone,:stAddress,:city,:state,:zip)";
 	
 	public void registerCustomer(Customer customer){
 		
@@ -31,6 +33,11 @@ public class CustomerRepository {
 		paramMap.put("promoCode", customer.getPromoCode());
 		paramMap.put("adChannel", customer.getAdChannel());
 		paramMap.put("insertDate", customer.getInsertDate());
+		paramMap.put("phone", customer.getPhone());
+		paramMap.put("stAddress", customer.getStAddress());
+		paramMap.put("city", customer.getCity());
+		paramMap.put("state", customer.getState());
+		paramMap.put("zip", customer.getZip());
 		
 		namedParameterTemplate.update(INSERT_CUSTOMER_RECORDS, paramMap);
 	}
