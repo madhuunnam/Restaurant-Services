@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.services.dao.AdminRepository;
 import com.restaurant.services.dao.AssociateRepository;
 import com.restaurant.services.dao.CustomerRepository;
 import com.restaurant.services.dao.RestRepository;
+import com.restaurant.services.model.Admin;
 import com.restaurant.services.model.Associate;
 import com.restaurant.services.model.Customer;
 import com.restaurant.services.model.Restaurant;
@@ -27,6 +29,8 @@ public class RestaurantRestWSController {
 	RestRepository restRepository;
 	@Autowired
 	AssociateRepository assocRepository;
+	@Autowired
+	AdminRepository adminRepository;
 	
 
 	@RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "application/json")
@@ -79,6 +83,18 @@ public class RestaurantRestWSController {
 			assocInsertStatus = "Associate Regitration Failed";
 		}
 	return new ResponseEntity<String>(assocInsertStatus, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/signUpAdmin", method = RequestMethod.POST)
+	public ResponseEntity<String> registerAdmin(@RequestBody Admin admin) {
+		String adminInsertStatus = "Admin Regitration Success! Please Login";
+		try {
+			adminRepository.registerAdmin(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+			adminInsertStatus = "Admin Regitration Failed";
+		}
+	return new ResponseEntity<String>(adminInsertStatus, HttpStatus.OK);
 	}
 
 }
