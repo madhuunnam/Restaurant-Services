@@ -1,10 +1,13 @@
 package com.restaurant.services.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import com.restaurant.services.model.Customer;
@@ -79,5 +82,24 @@ public class RestRepository {
 
 		namedParameterTemplate.update(INSERT_REST_RECORDS, paramMap);
 	}
+	
+	public boolean verifyLogin(String restEmail,String restPwd){
+		
+		String CHECK_LOGIN_SQL = "SELECT * from Restaurants where emailAddress = :email ";
 
+		SqlParameterSource namedParameters = new MapSqlParameterSource("email",restEmail);
+		
+		Restaurant rest = (Restaurant) namedParameterTemplate.queryForObject(CHECK_LOGIN_SQL, namedParameters, new RestMapper());
+		
+		if(rest.getEmail().equals(restEmail) && rest.getPassword().equals(restPwd)){
+			return true;
+		}
+		return false;
+	}
+
+	public List<Restaurant> listRestaurants() {  
+		   String SQL = "SELECT * FROM Restaurants";  
+		   List<Restaurant> restaurants = (List<Restaurant>) namedParameterTemplate.query(SQL, new RestMapper());  
+		     return restaurants;  
+		} 
 }

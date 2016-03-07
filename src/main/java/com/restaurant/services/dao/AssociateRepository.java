@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import com.restaurant.services.model.Associate;
+import com.restaurant.services.model.Customer;
 
 @Component
 public class AssociateRepository {
@@ -41,5 +44,18 @@ public class AssociateRepository {
 		
 		namedParameterTemplate.update(INSERT_ASSOC_RECORDS, paramMap);
 	}
+	
+	public boolean verifyLogin(String assocEmail,String assocPwd){
+		
+		String CHECK_LOGIN_SQL = "SELECT * from Associates where emailAddress = :email ";
 
+		SqlParameterSource namedParameters = new MapSqlParameterSource("email",assocEmail);
+		
+		Associate assoc = (Associate) namedParameterTemplate.queryForObject(CHECK_LOGIN_SQL, namedParameters, new AssociateMapper());
+
+		if(assoc.getEmail().equals(assocEmail) && assoc.getPassword().equals(assocPwd)){
+			return true;
+		}
+		return false;
+	}
 }

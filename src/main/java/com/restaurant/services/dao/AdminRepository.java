@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import com.restaurant.services.model.Admin;
+import com.restaurant.services.model.Customer;
 
 @Component
 public class AdminRepository {
@@ -60,5 +63,19 @@ public class AdminRepository {
 		
 		
 		namedParameterTemplate.update(UPDATE_ADMIN_RECORDS, paramMap);
+	}
+	
+public boolean verifyLogin(String adminEmail,String adminPwd){
+		
+		String CHECK_LOGIN_SQL = "SELECT * from Admins where emailAddress = :email ";
+
+		SqlParameterSource namedParameters = new MapSqlParameterSource("email",adminEmail);
+		
+		Admin admin = (Admin) namedParameterTemplate.queryForObject(CHECK_LOGIN_SQL, namedParameters, new AdminMapper());
+
+		if(admin.getEmail().equals(adminEmail) && admin.getPassword().equals(adminPwd)){
+			return true;
+		}
+		return false;
 	}
 }

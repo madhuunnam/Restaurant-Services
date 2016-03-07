@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import com.restaurant.services.model.Customer;
@@ -41,5 +44,20 @@ public class CustomerRepository {
 		
 		namedParameterTemplate.update(INSERT_CUSTOMER_RECORDS, paramMap);
 	}
+	
+	public boolean verifyLogin(String custEmail,String custPwd){
+		
+		String CHECK_LOGIN_SQL = "SELECT * from Customers where emailAddress = :email ";
 
+		SqlParameterSource namedParameters = new MapSqlParameterSource("email",custEmail);
+		
+		Customer cust = (Customer) namedParameterTemplate.queryForObject(CHECK_LOGIN_SQL, namedParameters, new CustomerMapper());
+
+		if(cust.getEmail().equals(custEmail) && cust.getPassword().equals(custPwd)){
+			return true;
+		}
+		return false;
+	}
+	
+	
 }
