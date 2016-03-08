@@ -7,11 +7,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.restaurant.services.model.Admin;
 
+public class AdminMapper implements RowMapper {
 
-public class AdminMapper implements RowMapper{
-	
-public Admin mapRow(ResultSet rs, int rowNum) throws SQLException {
-		
+	public Admin mapRow(ResultSet rs, int rowNum) throws SQLException {
+
 		Admin admin = new Admin();
 		admin.setAdminId(rs.getString("adminID"));
 		admin.setEmail(rs.getString("emailAddress"));
@@ -25,9 +24,7 @@ public Admin mapRow(ResultSet rs, int rowNum) throws SQLException {
 		admin.setOtherPhone(rs.getString("otherPhone"));
 		admin.setSecQuest(rs.getString("question"));
 		admin.setSecAns(rs.getString("answer"));
-		
-		
-		return admin;
-	} 
-}
 
+		return admin;
+	}
+}

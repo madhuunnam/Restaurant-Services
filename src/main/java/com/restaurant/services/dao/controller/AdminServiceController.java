@@ -17,43 +17,42 @@ public class AdminServiceController {
 
 	@Autowired
 	AdminRepository adminRepository;
-	
 
 	@RequestMapping(value = "/signUpAdmin", method = RequestMethod.POST)
 	public ResponseEntity<String> registerAdmin(@RequestBody Admin admin) {
-		String adminInsertStatus = "Admin Regitration Success! Please Login";
+		String adminInsertStatus = "Admin SignUp Success! Please Login";
 		try {
 			adminRepository.registerAdmin(admin);
 		} catch (Exception e) {
 			e.printStackTrace();
-			adminInsertStatus = "Admin Regitration Failed";
+			adminInsertStatus = "Admin SignUp Failed";
 		}
-	return new ResponseEntity<String>(adminInsertStatus, HttpStatus.OK);
+		return new ResponseEntity<String>(adminInsertStatus, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/updateAdminProfile", method = RequestMethod.PUT)
 	public ResponseEntity<String> updateAdmin(@RequestBody Admin admin) {
-		String adminUpdateStatus = "Admin Regitration Success! Please Login";
+		String adminUpdateStatus = "Admin Update Success!";
 		try {
 			adminRepository.updateAdmin(admin);
 		} catch (Exception e) {
 			e.printStackTrace();
 			adminUpdateStatus = "Admin Update Failed";
 		}
-	return new ResponseEntity<String>(adminUpdateStatus, HttpStatus.OK);
+		return new ResponseEntity<String>(adminUpdateStatus, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/getAdmin/{adminEmail:.+}", method = RequestMethod.GET, produces = "application/json")
 	public Admin getAdmin(@PathVariable("adminEmail") String adminEmail) {
 		String sqlStatus = "Sql Success!";
-		Admin ad = new Admin();
+		Admin admin = new Admin();
 		try {
-			ad = adminRepository.getAdmin(adminEmail);
+			admin = adminRepository.getAdmin(adminEmail);
 		} catch (Exception e) {
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";
 		}
-		return ad;
+		return admin;
 	}
-	
+
 }
