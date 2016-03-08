@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.services.dao.CustomerRepository;
+import com.restaurant.services.model.Admin;
 import com.restaurant.services.model.Customer;
 
 @RestController
@@ -32,6 +33,17 @@ public class CustomerServiceController {
 		return new ResponseEntity<String>(insertStatus, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/updateCustomerProfile", method = RequestMethod.PUT)
+	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) {
+		String customerUpdateStatus = "Customer Update Success!";
+		try {
+			customerRepository.updateCustomer(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+			customerUpdateStatus = "Customer Update Failed";
+		}
+		return new ResponseEntity<String>(customerUpdateStatus, HttpStatus.OK);
+	}
 	@RequestMapping(value = "/getCustomer/{customerEmail:.+}", method = RequestMethod.GET, produces = "application/json")
 	public Customer getCustomer(@PathVariable("customerEmail") String customerEmail) {
 		String sqlStatus = "Sql Success!";
