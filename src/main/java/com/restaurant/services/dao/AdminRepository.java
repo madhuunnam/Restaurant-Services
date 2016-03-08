@@ -19,8 +19,9 @@ public class AdminRepository {
 	NamedParameterJdbcTemplate namedParameterTemplate;
 	
 	private static final String UPDATE_ADMIN_RECORDS = 
-			"UPDATE Admins SET insertDate=:insertDate,firstName=:fName,middleName=:mName,lastName=:lName,telephoneNumber=:phone1,"
-			+ "otherPhone=:phone2,mailAddr=:address,emailAddress=:email,password=:pwd,question=:question,answer=:answer where adminId = :adminId";
+			"UPDATE Admins SET firstName=:firstName, middleName=:middleName, lastName=:lastName, telephoneNumber=:phone1, "
+			+ "otherPhone=:phone2, mailAddr=:address, password=:password, question=:question, answer=:answer"
+			+ " where adminID = :adminId";
 			
 	
 	private static final String INSERT_ADMIN_RECORDS = 
@@ -49,14 +50,13 @@ public class AdminRepository {
 	public void updateAdmin(Admin admin){
 		
 		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("adminId", admin.getAdminId());
 		paramMap.put("firstName", admin.getFirstName());
 		paramMap.put("middleName", admin.getMiddleName());
 		paramMap.put("lastName", admin.getLastName());
-		paramMap.put("email", admin.getEmail());
 		paramMap.put("password", admin.getPassword());
 		paramMap.put("phone1", admin.getPhone());
 		paramMap.put("phone2", admin.getOtherPhone());
-		paramMap.put("insertDate", admin.getInsertDate());
 		paramMap.put("address", admin.getAddress());
 		paramMap.put("question", admin.getSecQuest());
 		paramMap.put("answer", admin.getSecAns());
@@ -65,19 +65,6 @@ public class AdminRepository {
 		namedParameterTemplate.update(UPDATE_ADMIN_RECORDS, paramMap);
 	}
 	
-public boolean verifyLogin(String adminEmail,String adminPwd){
-		
-		String CHECK_LOGIN_SQL = "SELECT * from Admins where emailAddress = :email ";
-
-		SqlParameterSource namedParameters = new MapSqlParameterSource("email",adminEmail);
-		
-		Admin admin = (Admin) namedParameterTemplate.queryForObject(CHECK_LOGIN_SQL, namedParameters, new AdminMapper());
-
-		if(admin.getEmail().equals(adminEmail) && admin.getPassword().equals(adminPwd)){
-			return true;
-		}
-		return false;
-	}
 
 public Admin getAdmin(String adminEmail) {  
 	   String SQL = "SELECT * FROM Admins where emailAddress = :email ";

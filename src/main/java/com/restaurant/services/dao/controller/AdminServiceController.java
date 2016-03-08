@@ -31,7 +31,7 @@ public class AdminServiceController {
 	return new ResponseEntity<String>(adminInsertStatus, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/updateAdminProfile", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateAdminProfile", method = RequestMethod.PUT)
 	public ResponseEntity<String> updateAdmin(@RequestBody Admin admin) {
 		String adminUpdateStatus = "Admin Regitration Success! Please Login";
 		try {

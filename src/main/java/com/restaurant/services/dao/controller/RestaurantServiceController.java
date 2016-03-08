@@ -30,18 +30,18 @@ public class RestaurantServiceController {
 	@Autowired
 	RestRepository restRepository;
 
-//	@RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "application/json")
-//	public Associate ping() {
-//
-//		Associate assoc = new Associate();
-//		assoc.setFirstName("Madhu");
-//		assoc.setLastName("Unnam");
-//		assoc.setInsertDate(new Date());
-//		System.out.println("Madhu is testing REST Service ping");
-//		// customerRepository.registerCustomer(customer);
-//
-//		return assoc;
-//	}
+	@RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "application/json")
+	public Admin ping() {
+
+		Admin admin = new Admin();
+		admin.setFirstName("Madhu");
+		admin.setLastName("Unnam");
+		admin.setInsertDate(new Date());
+		System.out.println("Madhu is testing REST Service ping");
+		// customerRepository.registerCustomer(customer);
+
+		return admin;
+	}
 
 	@RequestMapping(value = "/signUpRestaurant", method = RequestMethod.POST)
 	public ResponseEntity<String> registerRest(@RequestBody Restaurant rest) {

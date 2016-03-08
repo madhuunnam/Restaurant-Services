@@ -83,19 +83,6 @@ public class RestRepository {
 		namedParameterTemplate.update(INSERT_REST_RECORDS, paramMap);
 	}
 	
-	public boolean verifyLogin(String restEmail,String restPwd){
-		
-		String CHECK_LOGIN_SQL = "SELECT * from Restaurants where emailAddress = :email ";
-
-		SqlParameterSource namedParameters = new MapSqlParameterSource("email",restEmail);
-		
-		Restaurant rest = (Restaurant) namedParameterTemplate.queryForObject(CHECK_LOGIN_SQL, namedParameters, new RestMapper());
-		
-		if(rest.getEmail().equals(restEmail) && rest.getPassword().equals(restPwd)){
-			return true;
-		}
-		return false;
-	}
 
 	public List<Restaurant> listOfRestaurants() {  
 		   String SQL = "SELECT * FROM Restaurants";  

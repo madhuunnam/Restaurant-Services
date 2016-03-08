@@ -19,6 +19,7 @@ public class Customer {
 	private String state;
 	private String zip;
 	
+	
 	public String getCustID() {
 		return custID;
 	}
