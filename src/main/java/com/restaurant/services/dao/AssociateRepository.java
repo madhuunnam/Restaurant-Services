@@ -58,4 +58,12 @@ public class AssociateRepository {
 		}
 		return false;
 	}
+	public Associate getAssociate(String assocEmail) {  
+		   String SQL = "SELECT * FROM Associates where emailAddress = :email ";
+		   
+		   SqlParameterSource namedParameters = new MapSqlParameterSource("email", assocEmail);
+			
+		   Associate assoc = (Associate) namedParameterTemplate.queryForObject(SQL, namedParameters, new AssociateMapper());  
+		     return assoc;  
+		}
 }

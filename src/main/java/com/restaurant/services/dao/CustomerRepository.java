@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import com.restaurant.services.model.Customer;
+import com.restaurant.services.model.Restaurant;
 
 @Component
 public class CustomerRepository {
@@ -45,19 +46,17 @@ public class CustomerRepository {
 		namedParameterTemplate.update(INSERT_CUSTOMER_RECORDS, paramMap);
 	}
 	
-	public boolean verifyLogin(String custEmail,String custPwd){
+	
+	
+	public Customer getCustomer(String custEmail) {  
 		
-		String CHECK_LOGIN_SQL = "SELECT * from Customers where emailAddress = :email ";
-
-		SqlParameterSource namedParameters = new MapSqlParameterSource("email",custEmail);
-		
-		Customer cust = (Customer) namedParameterTemplate.queryForObject(CHECK_LOGIN_SQL, namedParameters, new CustomerMapper());
-
-		if(cust.getEmail().equals(custEmail) && cust.getPassword().equals(custPwd)){
-			return true;
+		   String SQL = "SELECT * FROM Customers where emailAddress = :email ";
+		   System.out.println("The CUST ID is " +custEmail);
+		   SqlParameterSource namedParameters = new MapSqlParameterSource("email", custEmail);
+			
+		   Customer customer = (Customer) namedParameterTemplate.queryForObject(SQL, namedParameters, new CustomerMapper());  
+		     return customer;  
 		}
-		return false;
-	}
 	
 	
 }

@@ -78,4 +78,14 @@ public boolean verifyLogin(String adminEmail,String adminPwd){
 		}
 		return false;
 	}
+
+public Admin getAdmin(String adminEmail) {  
+	   String SQL = "SELECT * FROM Admins where emailAddress = :email ";
+	   
+	   SqlParameterSource namedParameters = new MapSqlParameterSource("email", adminEmail);
+		
+	   Admin admin = (Admin) namedParameterTemplate.queryForObject(SQL, namedParameters, new AdminMapper());  
+	     return admin;  
+	}
+
 }

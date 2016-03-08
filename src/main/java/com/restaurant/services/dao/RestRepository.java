@@ -97,9 +97,19 @@ public class RestRepository {
 		return false;
 	}
 
-	public List<Restaurant> listRestaurants() {  
+	public List<Restaurant> listOfRestaurants() {  
 		   String SQL = "SELECT * FROM Restaurants";  
 		   List<Restaurant> restaurants = (List<Restaurant>) namedParameterTemplate.query(SQL, new RestMapper());  
 		     return restaurants;  
+		} 
+	
+	public Restaurant getRestaurant(String restEmail) {  
+		   String SQL = "SELECT * FROM Restaurants where emailAddress = :email ";
+		   
+		   System.out.println("The REST ID is " +restEmail);
+		   SqlParameterSource namedParameters = new MapSqlParameterSource("email", restEmail);
+			
+		   Restaurant restaurant = (Restaurant) namedParameterTemplate.queryForObject(SQL, namedParameters, new RestMapper());  
+		     return restaurant;  
 		} 
 }
