@@ -31,11 +31,11 @@ public class RestaurantServiceController {
 	RestRepository restRepository;
 
 	@RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "application/json")
-	public Admin ping() {
+	public Restaurant ping() {
 
-		Admin admin = new Admin();
-		admin.setFirstName("Madhu");
-		admin.setLastName("Unnam");
+		Restaurant admin = new Restaurant();
+		admin.setAltName("Madhu");
+		admin.setRestName("Unnam");
 		admin.setInsertDate(new Date());
 		System.out.println("Madhu is testing REST Service ping");
 		// customerRepository.registerCustomer(customer);
@@ -54,6 +54,18 @@ public class RestaurantServiceController {
 			restInsertStatus = "Restaurant Regitration Failed";
 		}
 	return new ResponseEntity<String>(restInsertStatus, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/updateRestaurantProfile", method = RequestMethod.PUT)
+	public ResponseEntity<String> updateRestaurant(@RequestBody Restaurant restaurant) {
+		String restaurantUpdateStatus = "Restaurant Update Success!";
+		try {
+			restRepository.updateRestaurant(restaurant);
+		} catch (Exception e) {
+			e.printStackTrace();
+			restaurantUpdateStatus = "Restaurant Update Failed";
+		}
+		return new ResponseEntity<String>(restaurantUpdateStatus, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/getRestaurantList", method = RequestMethod.GET, produces = "application/json")
