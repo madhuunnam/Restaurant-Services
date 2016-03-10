@@ -43,6 +43,18 @@ public class ItemRepository {
 		List<Item> itemsOfRestaurant = (List<Item>) namedParameterTemplate.query(SQL, paramMap, new ItemMapper());
 		return itemsOfRestaurant;
 	}
+	
+	public void deleteItemFromRestaurant(String restId,String itemNo) {
+		
+		String SQL = "DELETE FROM Items where resID = :restId and itemNum =:itemNum";
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("restId", restId);
+		paramMap.put("itemNum", itemNo);
+		
+		namedParameterTemplate.update(SQL, paramMap);
+		
+	}
 
 	private Map<String, Object> createParameterMap(Item item) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();

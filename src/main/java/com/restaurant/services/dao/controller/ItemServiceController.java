@@ -74,5 +74,17 @@ public class ItemServiceController {
 		return items;
 	}
 	
+	@RequestMapping(value = "/deleteItemFromRestaurant/{restaurantId}/{itemNum}", method = RequestMethod.GET)
+	public ResponseEntity<String> deleteItemFromRestaurant(@PathVariable("restaurantId") String restaurantId, @PathVariable("itemNum") String itemNo) {
+		String sqlStatus = "Sql Success!";
+		try {
+			itemRepository.deleteItemFromRestaurant(restaurantId,itemNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return new ResponseEntity<String>(sqlStatus, HttpStatus.OK);
+	}
+	
 	
 }
