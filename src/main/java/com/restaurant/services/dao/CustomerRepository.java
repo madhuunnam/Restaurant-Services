@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -102,12 +104,19 @@ public class CustomerRepository {
 	
 	public Customer getCustomer(String custEmail) {  
 		
-		   String SQL = "SELECT * FROM Customers where emailAddress = :email ";
+		   String SQL = "SELECT * FROM Customers where emailAddress = :email";
 		   System.out.println("The CUST ID is " +custEmail);
 		   SqlParameterSource namedParameters = new MapSqlParameterSource("email", custEmail);
 			
-		   Customer customer = (Customer) namedParameterTemplate.queryForObject(SQL, namedParameters, new CustomerMapper());  
-		     return customer;  
+		   Customer customer =new Customer();
+		   try{
+		     customer = (Customer) namedParameterTemplate.queryForObject(SQL, namedParameters, new CustomerMapper());
+		   } catch (EmptyResultDataAccessException e) {
+			   e.printStackTrace();
+			   return null;
+		   }  
+		     
+		   return customer;  
 		}
 	
 	

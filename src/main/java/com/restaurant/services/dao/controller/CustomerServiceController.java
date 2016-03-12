@@ -1,6 +1,7 @@
 package com.restaurant.services.dao.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +52,8 @@ public class CustomerServiceController {
 		System.out.println("THE CUST ID IS " + customerEmail );
 		try {
 			customer = customerRepository.getCustomer(customerEmail);
-		} catch (Exception e) {
+		} catch (EmptyResultDataAccessException e) {
+			customer= null;
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";
 		}
