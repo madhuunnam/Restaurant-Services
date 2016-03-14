@@ -3,7 +3,7 @@ package com.restaurant.services.model;
 import java.util.Date;
 
 public class Admin {
-
+	
 	private String adminId;
 	private String firstName = "";
 	private String middleName = "";
@@ -120,5 +120,5 @@ public class Admin {
 				+ phone + ", otherPhone=" + otherPhone + ", secQuest=" + secQuest + ", secAns=" + secAns + ", address="
 				+ address + "]";
 	}
-
+	
 }
