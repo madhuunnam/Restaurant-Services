@@ -1,6 +1,5 @@
 package com.restaurant.services.dao;
 
-import java.time.LocalTime;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -88,9 +87,6 @@ public Restaurant mapRow(ResultSet rs, int rowNum) throws SQLException {
 		rest.setMgrPhone(rs.getString("mgrPhone"));
 		rest.setMgrEmail(rs.getString("mgrEmail"));
 		rest.setMgrPasswd(rs.getString("mgrPasswd"));
-		
-		
-		
 		
 		return rest;
 	} 
