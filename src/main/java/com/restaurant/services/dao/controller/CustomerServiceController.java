@@ -60,5 +60,18 @@ public class CustomerServiceController {
 		return customer;
 	}
 	
+	@RequestMapping(value = "/getNewCustomerId", method = RequestMethod.GET, produces = "application/json")
+	public String getNewCustomerId() {
+		
+		String sqlStatus = "Sql Success!";
+		String custId="";
+		try {
+			custId = customerRepository.getNewCustomerId();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return custId;
+	}
 
 }
