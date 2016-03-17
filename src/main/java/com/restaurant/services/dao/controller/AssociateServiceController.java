@@ -55,4 +55,18 @@ public class AssociateServiceController {
 		}
 		return associate;
 	}
+	
+	@RequestMapping(value = "/getNewAssociateId", method = RequestMethod.GET, produces = "application/json")
+	public String getNewAssociateId() {
+		
+		String sqlStatus = "Sql Success!";
+		String assocId="";
+		try {
+			assocId = assocRepository.getNewAssociateId();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return assocId;
+	}
 }
