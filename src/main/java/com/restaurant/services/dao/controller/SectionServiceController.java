@@ -23,7 +23,7 @@ public class SectionServiceController {
 	
 	@RequestMapping(value = "/addSection", method = RequestMethod.POST)
 	public ResponseEntity<String> addSection(@RequestBody Section sec) {
-
+System.out.println("In add Section");
 		String insertStatus = "Section SetUp Success!";
 		try {
 			sectionRepository.addSection(sec);
