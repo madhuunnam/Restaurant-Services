@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.restaurant.services.dao.CustomerRepository;
+import com.restaurant.services.dao.repository.CustomerRepository;
 import com.restaurant.services.model.Admin;
 import com.restaurant.services.model.Customer;
 
@@ -73,5 +73,20 @@ public class CustomerServiceController {
 		}
 		return custId;
 	}
+	
+	@RequestMapping(value = "/getSavedAddressForCustomer/{custID}", method = RequestMethod.GET, produces = "application/json")
+	public Customer getSavedAddressForCustomer(@PathVariable("custID") String custId) {
+		
+		String sqlStatus = "Sql Success!";
+		Customer cust = null;
+		try {
+			cust = customerRepository.getSavedAddressForCustomer(custId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return cust;
+	}
+	
 
 }

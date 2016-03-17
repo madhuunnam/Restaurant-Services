@@ -1,4 +1,4 @@
-package com.restaurant.services.dao;
+package com.restaurant.services.dao.repository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,15 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
-import com.restaurant.services.model.Admin;
+import com.restaurant.services.dao.mapper.CustomerMapper;
 import com.restaurant.services.model.Customer;
-import com.restaurant.services.model.Restaurant;
 
 @Component
 public class CustomerRepository {
@@ -37,15 +36,24 @@ public class CustomerRepository {
 	public void registerCustomer(Customer customer) {
 
 		Map<String, Object> paramMap = createParameterMap(customer);
-		
-		namedParameterTemplate.update(INSERT_CUSTOMER_RECORDS, paramMap);
+
+		try {
+			namedParameterTemplate.update(INSERT_CUSTOMER_RECORDS, paramMap);
+		} catch (DataAccessException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	public void updateCustomer(Customer customer) {
 
 		Map<String, Object> paramMap = createParameterMap(customer);
 
-		namedParameterTemplate.update(UPDATE_CUSTOMER_RECORDS, paramMap);
+		try {
+			namedParameterTemplate.update(UPDATE_CUSTOMER_RECORDS, paramMap);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Customer getCustomer(String custEmail) {
@@ -57,21 +65,44 @@ public class CustomerRepository {
 		Customer customer = new Customer();
 		try {
 			customer = (Customer) namedParameterTemplate.queryForObject(SQL, namedParameters, new CustomerMapper());
-		} catch (EmptyResultDataAccessException e) {
+		} catch (DataAccessException e) {
 			e.printStackTrace();
 			return null;
 		}
 
 		return customer;
 	}
-	
+
 	public String getNewCustomerId() {
 
 		String SQL = "SELECT max(custID) as custID FROM Customers ";
-
-		String custId = namedParameterTemplate.getJdbcOperations().queryForObject(SQL, String.class);
-
+		String custId = "";
+		try {
+			custId = namedParameterTemplate.getJdbcOperations().queryForObject(SQL, String.class);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
 		return custId;
+	}
+
+	public Customer getSavedAddressForCustomer(String custId) {
+
+		String SQL = "SELECT c.addrStNum,c.city,c.state,c.zip,cr.addr2,cr.addr3,cr.addr4 from customers c,"
+				+ "credits cr where c.custID = :custId and c.custID = cr.custID ";
+
+		SqlParameterSource namedParameters = new MapSqlParameterSource("custId", custId);
+
+		Customer customer = new Customer();
+		try {
+			customer = (Customer) namedParameterTemplate.queryForObject(SQL, namedParameters, new CustomerMapper());
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return customer;
+
 	}
 
 	private Map<String, Object> createParameterMap(Customer customer) {

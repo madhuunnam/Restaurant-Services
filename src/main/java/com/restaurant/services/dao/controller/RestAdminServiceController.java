@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.restaurant.services.dao.RestAdminRepository;
+import com.restaurant.services.dao.repository.RestAdminRepository;
 import com.restaurant.services.model.RestAdmin;
 
 @RestController

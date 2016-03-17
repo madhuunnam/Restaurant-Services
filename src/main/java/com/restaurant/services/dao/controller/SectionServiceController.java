@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.restaurant.services.dao.SectionRepository;
+import com.restaurant.services.dao.repository.SectionRepository;
 import com.restaurant.services.model.ChoiceValues;
 import com.restaurant.services.model.Section;
 

@@ -1,4 +1,4 @@
-package com.restaurant.services.dao;
+package com.restaurant.services.dao.repository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.restaurant.services.dao.mapper.FavoriteMapper;
 import com.restaurant.services.model.Favorite;
 
 @Component

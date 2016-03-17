@@ -1,4 +1,4 @@
-package com.restaurant.services.dao;
+package com.restaurant.services.dao.repository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
+import com.restaurant.services.dao.mapper.AssocPerfMapper;
 import com.restaurant.services.model.AssocPerf;
 import com.restaurant.services.model.CustCredit;
 

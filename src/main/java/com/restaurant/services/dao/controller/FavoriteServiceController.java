@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.restaurant.services.dao.FavoriteRepository;
+import com.restaurant.services.dao.repository.FavoriteRepository;
 import com.restaurant.services.model.Favorite;
 
 @RestController
