@@ -1,10 +1,23 @@
 package com.restaurant.services.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Section {
 
 	private String restId;
 	private String secName;
 	private int numItem;
+	
+	List<Item> items =  new ArrayList<Item>();
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
 
 	public String getRestId() {
 		return restId;

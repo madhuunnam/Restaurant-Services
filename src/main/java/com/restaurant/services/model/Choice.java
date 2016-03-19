@@ -1,5 +1,8 @@
 package com.restaurant.services.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Choice {
 
 	private String restId;
@@ -9,6 +12,16 @@ public class Choice {
 	private String chType;
 	private boolean required;
 	private int numValue;
+	
+	List<ChoiceValues> chValues =  new ArrayList<ChoiceValues>();
+	
+	
+	public List<ChoiceValues> getChValues() {
+		return chValues;
+	}
+	public void setChValues(List<ChoiceValues> chValues) {
+		this.chValues = chValues;
+	}
 	public String getRestId() {
 		return restId;
 	}
