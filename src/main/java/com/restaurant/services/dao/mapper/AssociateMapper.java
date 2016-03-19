@@ -47,6 +47,14 @@ public class AssociateMapper implements RowMapper {
 		assoc.setPromoCode(rs.getString("promoCode"));
 		assoc.setAdChannel(rs.getString("adChannel"));
 		
+		assoc.getAssocPerf().setRunStart(rs.getDate("runStart"));
+		assoc.getAssocPerf().setAssocTitle(rs.getString("assocTitle"));
+		assoc.getAssocPerf().setTitleDate(rs.getDate("titleDate"));
+		assoc.getAssocPerf().setDownIDs(rs.getString("downIDs"));
+		assoc.getAssocPerf().setNumCust(rs.getInt("numCust"));
+		assoc.getAssocPerf().setNumRes(rs.getInt("numRes"));
+		assoc.getAssocPerf().setPersonScore(rs.getInt("personScore"));
+		assoc.getAssocPerf().setTeamScore(rs.getInt("teamScore"));
 		
 		return assoc;
 	} 

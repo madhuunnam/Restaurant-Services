@@ -47,7 +47,8 @@ public class AssociateRepository {
 	}
 
 	public Associate getAssociate(String assocEmail) {
-		String SQL = "SELECT * FROM Associates where emailAddress = :email ";
+		
+		String SQL = "SELECT * FROM Associates A, AssocPerf AP where emailAddress = :email and A.assocID = AP.assocID ";
 
 		SqlParameterSource namedParameters = new MapSqlParameterSource("email", assocEmail);
 
