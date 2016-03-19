@@ -74,13 +74,13 @@ public class CustomerServiceController {
 		return custId;
 	}
 	
-	@RequestMapping(value = "/getSavedAddressForCustomer/{custID}", method = RequestMethod.GET, produces = "application/json")
-	public Customer getSavedAddressForCustomer(@PathVariable("custID") String custId) {
+	@RequestMapping(value = "/getCustomerById/{custID}", method = RequestMethod.GET, produces = "application/json")
+	public Customer getCustomerById(@PathVariable("custID") String custId) {
 		
 		String sqlStatus = "Sql Success!";
 		Customer cust = null;
 		try {
-			cust = customerRepository.getSavedAddressForCustomer(custId);
+			cust = customerRepository.getCustomerById(custId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";

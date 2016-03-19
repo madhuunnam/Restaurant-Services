@@ -85,7 +85,7 @@ public class CustomerRepository {
 		return custId;
 	}
 
-	public Customer getSavedAddressForCustomer(String custId) {
+	public Customer getCustomerById(String custId) {
 
 		String SQL = "SELECT * from customers c,"
 				+ "credits cr where c.custID = :custId and c.custID = cr.custID ";
