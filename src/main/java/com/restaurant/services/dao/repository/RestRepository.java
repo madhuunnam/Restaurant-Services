@@ -128,10 +128,27 @@ public class RestRepository {
 
 		paramMap.put("delivery", rest.getDelivery());
 		paramMap.put("deliBy", rest.getDeliBy());
-		paramMap.put("deliMin", rest.getDeliMin());
-		paramMap.put("deliFee", rest.getDeliFee());
+		//paramMap.put("deliMin", rest.getDeliMin());
+		
+		if(rest.getDeliMin() !=null && !rest.getDeliMin().isEmpty()){
+			paramMap.put("deliMin", Integer.parseInt(rest.getDeliMin()));
+		}else{
+			paramMap.put("deliMin", null);
+		}
+		//paramMap.put("deliFee", rest.getDeliFee());
+		if(rest.getDeliFee() !=null && !rest.getDeliFee().isEmpty()){
+			paramMap.put("deliFee", Integer.parseInt(rest.getDeliFee()));
+		}else{
+			paramMap.put("deliFee", null);
+		}
+		
 		paramMap.put("deliPolicy", rest.getDeliPolicy());
-		paramMap.put("deliRadius", rest.getDeliRadius());
+		//paramMap.put("deliRadius", rest.getDeliRadius());
+		if(rest.getDeliRadius() !=null && !rest.getDeliRadius().isEmpty()){
+			paramMap.put("deliRadius", Integer.parseInt(rest.getDeliRadius()));
+		}else{
+			paramMap.put("deliRadius", null);
+		}
 		paramMap.put("deliZips", rest.getDeliZips());
 		paramMap.put("deliStreets", rest.getDeliStreets());
 

@@ -92,11 +92,26 @@ public class AssociateRepository {
 		paramMap.put("comType", associate.getComType());
 		paramMap.put("preTye", associate.getPreTye());
 		paramMap.put("chgDate", associate.getChgDate());
-		paramMap.put("uplineId", associate.getUplineID());
+		//paramMap.put("uplineId", associate.getUplineID());
+		if(associate.getUplineID() !=null && !associate.getUplineID().isEmpty()){
+			paramMap.put("uplineId", Integer.parseInt(associate.getUplineID()));
+		}else{
+			paramMap.put("uplineId", null);
+		}
 		paramMap.put("uplineName", associate.getUplineName());
-		paramMap.put("gparId", associate.getGparID());
+	//	paramMap.put("gparId", associate.getGparID());
+		if(associate.getGparID() !=null && !associate.getGparID().isEmpty()){
+			paramMap.put("gparId", Integer.parseInt(associate.getGparID()));
+		}else{
+			paramMap.put("gparId", null);
+		}
 		paramMap.put("gparName", associate.getGparName());
-		paramMap.put("ggparID", associate.getGgparID());
+		//paramMap.put("ggparID", associate.getGgparID());
+		if(associate.getGgparID() !=null && !associate.getGgparID().isEmpty()){
+			paramMap.put("ggparID", Integer.parseInt(associate.getGgparID()));
+		}else{
+			paramMap.put("ggparID", null);
+		}
 		paramMap.put("ggparName", associate.getGgparName());
 
 		paramMap.put("promoCode", associate.getPromoCode());

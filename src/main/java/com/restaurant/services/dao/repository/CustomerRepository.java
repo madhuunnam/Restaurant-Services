@@ -52,6 +52,7 @@ public class CustomerRepository {
 			namedParameterTemplate.update(UPDATE_CUSTOMER_RECORDS, paramMap);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 
@@ -142,8 +143,11 @@ public class CustomerRepository {
 		paramMap.put("billZip1", customer.getBillZip1());
 		paramMap.put("billAddr1", customer.getBillAddr1());
 		paramMap.put("paypalNo", customer.getPaypalNum());
-
-		paramMap.put("recomenderId", customer.getRecomenderID());
+		if(customer.getRecomenderID() !=null && !customer.getRecomenderID().isEmpty()){
+			paramMap.put("recomenderId", Integer.parseInt(customer.getRecomenderID()));
+		}else{
+			paramMap.put("recomenderId", null);
+		}
 		paramMap.put("recomType", customer.getRecomType());
 		paramMap.put("promoCode", customer.getPromoCode());
 		paramMap.put("adChannel", customer.getAdChannel());
