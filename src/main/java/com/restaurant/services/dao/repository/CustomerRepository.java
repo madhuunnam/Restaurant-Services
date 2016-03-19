@@ -39,8 +39,8 @@ public class CustomerRepository {
 		try {
 			namedParameterTemplate.update(INSERT_CUSTOMER_RECORDS, paramMap);
 		} catch (DataAccessException e) {
-
 			e.printStackTrace();
+			throw e;
 		}
 	}
 
