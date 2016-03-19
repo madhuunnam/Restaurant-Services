@@ -22,7 +22,7 @@ public class AssociateRepository {
 
 	private static final String UPDATE_ASSOC_RECORDS = "UPDATE Associates SET leaveDate=:leaveDate,firstName=:firstName,"
 			+ "middleName=:middleName,lastName=:lastName,nickName=:nickName,telephoneNumber=:phone1,otherPhone=:phone2,"
-			+ "addrStNum=:stAddress,city=:city,state=:state,zip=:zip,email=:email,password=:pwd,"
+			+ "addrStNum=:stAddress,city=:city,state=:state,zip=:zip,emailAddress=:email,password=:pwd,"
 			+ "bankName=:bankName,bankRouteNum=:bankRouteNo,bankAccNum=:bankAcctNo,comType=:comType,preTye=:preTye,"
 			+ "chgDate=:chgDate,uplineID=:uplineId,uplineName=:uplineName,gparID=:gparId,gparName=:gparName,"
 			+ "ggparID=:ggparID,ggparName=:ggparName,promoCode=:promoCode,adChannel=:adChannel where assocID = :assocId";

@@ -32,7 +32,7 @@ public class RestRepository {
 	private static final String UPDATE_RESTAURANT_RECORDS = "UPDATE Restaurants SET resName=:restName,altName=:altName,foundYear=:year,"
 			+ "categories=:categories,cancelDate=:cancelDate,hasMenu=:hasMenu,inputBy=:inputBy,note=:note,telephoneNumber=:phone1,"
 			+ "otherPhone=:phone2,addrStNum=:stAddress,city=:city,state=:state,zip=:zip,latitude=:latitude,"
-			+ "longitude=:longitude,email=::email,passwd=:password,question=:question,answer=:ans,website=:website,monFrom=:monFrom,"
+			+ "longitude=:longitude,emailAddress=:email,passwd=:password,question=:question,answer=:ans,website=:website,monFrom=:monFrom,"
 			+ "monTo=:monTo,tueFrom=:tueFrom,tueTo=:tueTo,wedFrom=:wedFrom,wedTo=:wedTo,thuFrom=:thuFrom,thuTo=:thuTo,"
 			+ "friFrom=:friFrom,friTo=:friTo,satFrom=:satFrom,satTo=:satTo,sunFrom=:sunFrom,sunTo=:sunTo,closedDays=:closedDays,"
 			+ "delivery=:delivery,deliBy=:deliBy,deliMin=:deliMin,deliFee=:deliFee,deliPolicy=:deliPolicy,deliRadius=:deliRadius,"

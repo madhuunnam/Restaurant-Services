@@ -27,7 +27,7 @@ public class CustomerRepository {
 
 	private static final String UPDATE_CUSTOMER_RECORDS = "UPDATE Customers SET cancelDate=:cancelDate,firstName=:firstName,middleName=:middleName,"
 			+ "lastName=:lastName,nickName=:nickName,telephoneNumber=:phone1,otherPhone=:phone2,addrStNum=:addrStNum,city=:city,state=:state,"
-			+ "zip=:zip,latitude=:latitude,longitude=:longitude,email=:email,password=:password,cardNumber=:cardNo,cardType=:cardType,cardName=:cardName,"
+			+ "zip=:zip,latitude=:latitude,longitude=:longitude,emailAddress=:email,password=:password,cardNumber=:cardNo,cardType=:cardType,cardName=:cardName,"
 			+ "cardExp=:cardExp,cardCode=:cardCode,billZip=:billZip,billAddr=:billAddr,cardNumber1=:cardNo1,cardType1=:cardType1,cardName1=cardName1,"
 			+ "cardExp1=:cardExp1,cardCode1=:cardCode1,billZip1=:billZip1,billAddr1=:billAddr1,paypalNum=:paypalNo,recomenderID=:recomenderId,"
 			+ "recomType=:recomType,promoCode=:promoCode,adChannel=:adChannel where custID=:custId";

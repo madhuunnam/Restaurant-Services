@@ -20,7 +20,7 @@ public class AdminRepository {
 	NamedParameterJdbcTemplate namedParameterTemplate;
 
 	private static final String UPDATE_ADMIN_RECORDS = "UPDATE Admins SET firstName=:firstName, middleName=:middleName, lastName=:lastName, telephoneNumber=:phone1, "
-			+ "otherPhone=:phone2, mailAddr=:address, password=:password, question=:question, answer=:answer"
+			+ "otherPhone=:phone2,emailAddress=:email ,mailAddr=:address, password=:password, question=:question, answer=:answer"
 			+ " where adminID = :adminId";
 
 	private static final String INSERT_ADMIN_RECORDS = "INSERT INTO Admins(firstName, middleName, lastName, emailAddress, password, telephoneNumber, otherPhone, mailAddr, question, answer, insertDate)"
@@ -51,6 +51,7 @@ public class AdminRepository {
 		paramMap.put("firstName", admin.getFirstName());
 		paramMap.put("middleName", admin.getMiddleName());
 		paramMap.put("lastName", admin.getLastName());
+		paramMap.put("email", admin.getEmail());
 		paramMap.put("password", admin.getPassword());
 		paramMap.put("phone1", admin.getPhone());
 		paramMap.put("phone2", admin.getOtherPhone());
