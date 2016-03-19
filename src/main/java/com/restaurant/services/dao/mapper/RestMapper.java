@@ -97,7 +97,7 @@ public Restaurant mapRow(ResultSet rs, int rowNum) throws SQLException {
 		rest.getRestAdmin().setAvgStar(rs.getFloat("avgStar"));
 		rest.getRestAdmin().setNumYelp(rs.getInt("numYelp"));
 		rest.getRestAdmin().setYelpStar(rs.getFloat("yelpStar"));
-		rest.getRestAdmin().setPriceRange(rs.getString("pricerestnge"));
+		rest.getRestAdmin().setPriceRange(rs.getString("priceRange"));
 		rest.getRestAdmin().setRecomenderID(rs.getInt("recomenderID"));
 		rest.getRestAdmin().setRecomType(rs.getString("recomType"));
 		rest.getRestAdmin().setCommissionType(rs.getString("commissionType"));
