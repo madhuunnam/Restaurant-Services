@@ -101,4 +101,18 @@ public class RestaurantServiceController {
 		return restId;
 	}
 	
+	@RequestMapping(value = "/getRestaurantById/{restID}", method = RequestMethod.GET, produces = "application/json")
+	public Restaurant getRestaurantById(@PathVariable("restID") String restId) {
+		
+		String sqlStatus = "Sql Success!";
+		Restaurant rest = null;
+		try {
+			rest = restRepository.getRestaurantById(restId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return rest;
+	}
+	
 }
