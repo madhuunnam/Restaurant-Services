@@ -1,4 +1,4 @@
-package com.restaurant.services.dao.controller;
+package com.restaurant.services.controller;
 
 import java.util.List;
 

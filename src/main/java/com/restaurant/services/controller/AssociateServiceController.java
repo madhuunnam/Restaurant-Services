@@ -1,4 +1,4 @@
-package com.restaurant.services.dao.controller;
+package com.restaurant.services.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
