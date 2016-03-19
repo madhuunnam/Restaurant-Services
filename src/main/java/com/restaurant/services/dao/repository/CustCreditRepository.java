@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.restaurant.services.dao.mapper.CustCreditMapper;
 import com.restaurant.services.model.CustCredit;
-import com.restaurant.services.model.RestAdmin;
 
 @Component
 public class CustCreditRepository {

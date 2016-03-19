@@ -52,6 +52,15 @@ public class CustomerMapper implements RowMapper {
 		cust.setPromoCode(rs.getString("promoCode"));
 		cust.setAdChannel(rs.getString("adChannel"));
 		
+		cust.getCustCredit().setAddr2(rs.getString("addr2"));
+		cust.getCustCredit().setAddr3(rs.getString("addr3"));
+		cust.getCustCredit().setAddr4(rs.getString("addr4"));
+		cust.getCustCredit().setNumCust(rs.getInt("numCust"));
+		cust.getCustCredit().setNumRes(rs.getInt("numRes"));
+		cust.getCustCredit().setNumRev(rs.getInt("numRev"));
+		cust.getCustCredit().setNumOrders(rs.getInt("numOrders"));
+		cust.getCustCredit().setTotCredits(rs.getInt("totCredits"));
+		cust.getCustCredit().setCreditBal(rs.getInt("creditBal"));
 		
 		return cust;
 	} 

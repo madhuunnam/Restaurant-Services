@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -58,7 +57,7 @@ public class CustomerRepository {
 
 	public Customer getCustomer(String custEmail) {
 
-		String SQL = "SELECT * FROM Customers where emailAddress = :email";
+		String SQL = "SELECT * FROM Customers c, Credits cr where emailAddress = :email and c.custID = cr.custID";
 		System.out.println("The CUST ID is " + custEmail);
 		SqlParameterSource namedParameters = new MapSqlParameterSource("email", custEmail);
 
@@ -88,7 +87,7 @@ public class CustomerRepository {
 
 	public Customer getSavedAddressForCustomer(String custId) {
 
-		String SQL = "SELECT c.addrStNum,c.city,c.state,c.zip,cr.addr2,cr.addr3,cr.addr4 from customers c,"
+		String SQL = "SELECT * from customers c,"
 				+ "credits cr where c.custID = :custId and c.custID = cr.custID ";
 
 		SqlParameterSource namedParameters = new MapSqlParameterSource("custId", custId);
