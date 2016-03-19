@@ -56,13 +56,13 @@ public class RestRepository {
 	}
 
 	public List<Restaurant> listOfRestaurants() {
-		String SQL = "SELECT * FROM Restaurants";
+		String SQL = "SELECT * FROM Restaurants R, ResAdmin RA where R.resID = RA.resID";
 		List<Restaurant> restaurants = (List<Restaurant>) namedParameterTemplate.query(SQL, new RestMapper());
 		return restaurants;
 	}
 
 	public Restaurant getRestaurant(String restEmail) {
-		String SQL = "SELECT * FROM Restaurants where emailAddress = :email ";
+		String SQL = "SELECT * FROM Restaurants R, ResAdmin RA where R.emailAddress = :email and R.resID = RA.resID";
 
 		System.out.println("The REST ID is " + restEmail);
 		SqlParameterSource namedParameters = new MapSqlParameterSource("email", restEmail);

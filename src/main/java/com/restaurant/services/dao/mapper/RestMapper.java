@@ -88,6 +88,24 @@ public Restaurant mapRow(ResultSet rs, int rowNum) throws SQLException {
 		rest.setMgrEmail(rs.getString("mgrEmail"));
 		rest.setMgrPasswd(rs.getString("mgrPasswd"));
 		
+		rest.getRestAdmin().setSales(rs.getFloat("sales"));
+		rest.getRestAdmin().setNumOrders(rs.getInt("numOrders"));
+		rest.getRestAdmin().setPopularity(rs.getFloat("popularity"));
+		rest.getRestAdmin().setLikes(rs.getInt("likes"));
+		rest.getRestAdmin().setDislikes(rs.getInt("dislikes"));
+		rest.getRestAdmin().setNumRev(rs.getInt("numRev"));
+		rest.getRestAdmin().setAvgStar(rs.getFloat("avgStar"));
+		rest.getRestAdmin().setNumYelp(rs.getInt("numYelp"));
+		rest.getRestAdmin().setYelpStar(rs.getFloat("yelpStar"));
+		rest.getRestAdmin().setPriceRange(rs.getString("pricerestnge"));
+		rest.getRestAdmin().setRecomenderID(rs.getInt("recomenderID"));
+		rest.getRestAdmin().setRecomType(rs.getString("recomType"));
+		rest.getRestAdmin().setCommissionType(rs.getString("commissionType"));
+		rest.getRestAdmin().setPromoCode(rs.getString("promoCode"));
+		rest.getRestAdmin().setAdChannel(rs.getString("adChannel"));
+		rest.getRestAdmin().setNumCust(rs.getInt("numCust"));
+		rest.getRestAdmin().setNumRes(rs.getInt("numRes"));
+		
 		return rest;
 	} 
 }
