@@ -48,13 +48,13 @@ public class ChoiceValuesServiceController {
 		return new ResponseEntity<String>(updateStatus, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getChoiceValuesListForChoicesOfRestaurant/{restaurantId}/{chNum}/{valName}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getChoiceValuesListForChoicesOfRestaurant/{restaurantId}/{chNum}", method = RequestMethod.GET, produces = "application/json")
 	public List<ChoiceValues> getChoiceValuesListForChoicesOfRestaurant(@PathVariable("restaurantId") String restaurantId,
-			@PathVariable("chNum") String chNum, @PathVariable("valName") String valName) {
+			@PathVariable("chNum") String chNum) {
 		String sqlStatus = "Sql Success!";
 		List<ChoiceValues> choiceValues = null;
 		try {
-			choiceValues = choiceValuesRepository.getChoiceValuesListForChoicesOfRestaurant(restaurantId, chNum, valName);
+			choiceValues = choiceValuesRepository.getChoiceValuesListForChoicesOfRestaurant(restaurantId, chNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";

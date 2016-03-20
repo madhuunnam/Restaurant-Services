@@ -38,12 +38,11 @@ public class ChoiceValuesRepository {
 		namedParameterTemplate.update(UPDATE_CHOICEVALUES_RECORDS, paramMap);
 	}
 	
-	public List<ChoiceValues> getChoiceValuesListForChoicesOfRestaurant(String restId, String chNum, String valName) {
-		String SQL = "SELECT * FROM ChValues where resID = :restId and chNum = :chNum and valueName =:valName";
+	public List<ChoiceValues> getChoiceValuesListForChoicesOfRestaurant(String restId, String chNum) {
+		String SQL = "SELECT * FROM ChValues where resID = :restId and chNum = :chNum ";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
 		paramMap.put("chNum", chNum);
-		paramMap.put("valName", valName);
 		List<ChoiceValues> choiceValuesForChoicesOfRestaurant = (List<ChoiceValues>) namedParameterTemplate.query(SQL, paramMap,
 				new ChoiceValuesMapper());
 		return choiceValuesForChoicesOfRestaurant;

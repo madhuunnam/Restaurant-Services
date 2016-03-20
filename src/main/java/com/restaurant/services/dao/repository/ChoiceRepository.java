@@ -17,6 +17,9 @@ public class ChoiceRepository {
 
 	@Autowired
 	NamedParameterJdbcTemplate namedParameterTemplate;
+	
+	@Autowired
+	ChoiceValuesRepository choiceValueRepository;
 
 	private static final String INSERT_CHOICE_RECORDS = "INSERT INTO Choices(resID, itemNum, chNum, chTitle, chType, required, numValue) "
 			+ "VALUES (:restId,:itemNum,:chNum,:chTitle,:chType,:required,:numValue)";
@@ -45,6 +48,11 @@ public class ChoiceRepository {
 		paramMap.put("itemNum", itemNum);
 		List<Choice> choicesForItemsOfRestaurant = (List<Choice>) namedParameterTemplate.query(SQL, paramMap,
 				new ChoiceMapper());
+		
+		for(Choice choice : choicesForItemsOfRestaurant){
+			choice.setChValues(choiceValueRepository.getChoiceValuesListForChoicesOfRestaurant(restId, choice.getChNum()));
+		}
+		
 		return choicesForItemsOfRestaurant;
 	}
 
