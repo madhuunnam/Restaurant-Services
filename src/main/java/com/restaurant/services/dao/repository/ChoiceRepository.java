@@ -21,8 +21,8 @@ public class ChoiceRepository {
 	@Autowired
 	ChoiceValuesRepository choiceValueRepository;
 
-	private static final String INSERT_CHOICE_RECORDS = "INSERT INTO Choices(resID, itemNum, chNum, chTitle, chType, required, numValue) "
-			+ "VALUES (:restId,:itemNum,:chNum,:chTitle,:chType,:required,:numValue)";
+	private static final String INSERT_CHOICE_RECORDS = "INSERT INTO Choices(resID, itemNum, chTitle, chType, required, numValue) "
+			+ "VALUES (:restId,:itemNum,:chTitle,:chType,:required,:numValue)";
 
 	private static final String UPDATE_CHOICE_RECORDS = "UPDATE Choices SET chTitle=:chTitle,chType=:chType,required=:required,"
 			+ "numValue=:numValue WHERE resID = :restId and chNum =:chNum and itemNum=:itemNum";

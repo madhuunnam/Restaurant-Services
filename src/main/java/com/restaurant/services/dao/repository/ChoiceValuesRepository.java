@@ -21,8 +21,8 @@ public class ChoiceValuesRepository {
 	private static final String INSERT_CHOICEVALUES_RECORDS = "INSERT INTO ChValues(resID, chNum, valueName, valuePrice, extra) "
 			+ "VALUES (:restId,:chNum,:valName,:valPrice,:extra)";
 
-	private static final String UPDATE_CHOICEVALUES_RECORDS = "UPDATE ChValues SET valuePrice=:valPrice,extra=:extra WHERE "
-			+ "resID =:restId and chNum =:chNum and valueName=:valName";
+	private static final String UPDATE_CHOICEVALUES_RECORDS = "UPDATE ChValues SET valueName=:valName, valuePrice=:valPrice,extra=:extra WHERE "
+			+ "resID =:restId and chNum =:chNum and valueId=:valId";
 
 	public void addChoiceValues(ChoiceValues choiceVal) {
 
@@ -48,13 +48,13 @@ public class ChoiceValuesRepository {
 		return choiceValuesForChoicesOfRestaurant;
 	}
 
-	public void deleteChoiceValuesForChoicesOfRestaurant(String restId, String choiceNo, String valueName) {
+	public void deleteChoiceValuesForChoicesOfRestaurant(String restId, String choiceNo, String valueId) {
 
-		String SQL = "DELETE FROM ChValues where resID = :restId and chNum =:chNum and valueName =:valueName";
+		String SQL = "DELETE FROM ChValues where resID = :restId and chNum =:chNum and valueId =:valId";
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
-		paramMap.put("valueName", valueName);
+		paramMap.put("valId", valueId);
 		paramMap.put("chNum", choiceNo);
 
 		namedParameterTemplate.update(SQL, paramMap);
@@ -66,6 +66,7 @@ public class ChoiceValuesRepository {
 		paramMap.put("restId", choiceVal.getRestId());
 		paramMap.put("chNum", choiceVal.getChNum());
 		paramMap.put("valName", choiceVal.getValueName());
+		paramMap.put("valId", choiceVal.getValueId());
 		paramMap.put("valPrice", choiceVal.getValuePrice());
 		paramMap.put("extra", choiceVal.isExtra());
 		return paramMap;
