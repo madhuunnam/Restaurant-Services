@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS ResAdmin (
 CREATE TABLE IF NOT EXISTS Sections (
 
 	resID		int references Restaurants,
-	secName		varchar(100),
+	secName		varchar(100) references Items,
 	numItem 	tinyint,
 	PRIMARY KEY (resID, secName)
 );
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS Sections (
 CREATE TABLE IF NOT EXISTS Items (
 
 	resID		int references Restaurants,
-	itemNum		int NOT NULL,
+	itemNum		int AUTO_INCREMENT PRIMARY KEY,
 	secName		varchar(100),
 	itemName	varchar(100) NOT NULL, -- can mix English and Chinese
 	description	text,
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS Choices (
 
 	resID		int references Restaurants,
 	itemNum		int references Items,
-	chNum		int NOT NULL,
+	chNum		int AUTO_INCREMENT PRIMARY KEY,
 	chTitle		varchar(50),
 	chType		varchar(50),
 	required	boolean,
@@ -191,10 +191,11 @@ CREATE TABLE IF NOT EXISTS ChValues(
 
 	resID		int references Restaurants,
 	chNum		int references Choices,
+	valueId		int AUTO_INCREMENT PRIMARY KEY,
 	valueName	varchar(30),
 	valuePrice	float,
 	extra		boolean,
-	PRIMARY KEY (resID, chNum, valueName)
+	PRIMARY KEY (resID, chNum, valueId)
 );
 
 
@@ -677,7 +678,5 @@ CREATE TABLE IF NOT EXISTS ForSales(
 	
 -- -------------------------------------------------------	
 	
-Git
-	
-killspree6**
+
 
