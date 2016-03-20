@@ -69,7 +69,7 @@ public class OrderRepository {
 	}
 
 	public Order getOrderbyOrderNumForRestaurant(String orderNo, String restId) {
-		String SQL = "SELECT * FROM Orders where orderNum = :orderNum";
+		String SQL = "SELECT * FROM Orders where orderNum = :orderNum and resID=:restId";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("orderNum", orderNo);
 		paramMap.put("resID", restId);
