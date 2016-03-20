@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -81,6 +82,24 @@ public class RestRepository {
 		return restID;
 	}
 
+	public Restaurant getRestaurantById(String restID) {
+
+		String SQL = "SELECT * from restaurants r," + "ResAdmin ra where r.resID = :restId and r.resID = ra.resID ";
+
+		SqlParameterSource namedParameters = new MapSqlParameterSource("restId", restID);
+
+		Restaurant restaurant = new Restaurant();
+		try {
+			restaurant = (Restaurant) namedParameterTemplate.queryForObject(SQL, namedParameters, new RestMapper());
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return restaurant;
+
+	}
+
 	private Map<String, Object> createParameterMap(Restaurant rest) {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -128,25 +147,25 @@ public class RestRepository {
 
 		paramMap.put("delivery", rest.getDelivery());
 		paramMap.put("deliBy", rest.getDeliBy());
-		//paramMap.put("deliMin", rest.getDeliMin());
-		
-		if(rest.getDeliMin() !=null && !rest.getDeliMin().isEmpty()){
+		// paramMap.put("deliMin", rest.getDeliMin());
+
+		if (rest.getDeliMin() != null && !rest.getDeliMin().isEmpty()) {
 			paramMap.put("deliMin", Integer.parseInt(rest.getDeliMin()));
-		}else{
+		} else {
 			paramMap.put("deliMin", null);
 		}
-		//paramMap.put("deliFee", rest.getDeliFee());
-		if(rest.getDeliFee() !=null && !rest.getDeliFee().isEmpty()){
+		// paramMap.put("deliFee", rest.getDeliFee());
+		if (rest.getDeliFee() != null && !rest.getDeliFee().isEmpty()) {
 			paramMap.put("deliFee", Integer.parseInt(rest.getDeliFee()));
-		}else{
+		} else {
 			paramMap.put("deliFee", null);
 		}
-		
+
 		paramMap.put("deliPolicy", rest.getDeliPolicy());
-		//paramMap.put("deliRadius", rest.getDeliRadius());
-		if(rest.getDeliRadius() !=null && !rest.getDeliRadius().isEmpty()){
+		// paramMap.put("deliRadius", rest.getDeliRadius());
+		if (rest.getDeliRadius() != null && !rest.getDeliRadius().isEmpty()) {
 			paramMap.put("deliRadius", Integer.parseInt(rest.getDeliRadius()));
-		}else{
+		} else {
 			paramMap.put("deliRadius", null);
 		}
 		paramMap.put("deliZips", rest.getDeliZips());
