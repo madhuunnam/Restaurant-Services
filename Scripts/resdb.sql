@@ -167,8 +167,8 @@ CREATE TABLE IF NOT EXISTS Items (
 	itemName	varchar(100) NOT NULL, -- can mix English and Chinese
 	description	text,
 	basePrice	float,
-	numChoice	tinyint,
-	PRIMARY KEY (resID, itemNum)
+	numChoice	tinyint
+	
 );
 
 
@@ -181,8 +181,8 @@ CREATE TABLE IF NOT EXISTS Choices (
 	chTitle		varchar(50),
 	chType		varchar(50),
 	required	boolean,
-	numValue	tinyint,
-	PRIMARY KEY (resID, itemNum, chNum)
+	numValue	tinyint
+	
 );
 
 
@@ -194,8 +194,8 @@ CREATE TABLE IF NOT EXISTS ChValues(
 	valueId		int AUTO_INCREMENT PRIMARY KEY,
 	valueName	varchar(30),
 	valuePrice	float,
-	extra		boolean,
-	PRIMARY KEY (resID, chNum, valueId)
+	extra		boolean
+	
 );
 
 
@@ -678,5 +678,4 @@ CREATE TABLE IF NOT EXISTS ForSales(
 	
 -- -------------------------------------------------------	
 	
-
 
