@@ -13,6 +13,7 @@ public class ChoiceValuesMapper implements RowMapper{
 	
 		ChoiceValues chVal = new ChoiceValues();
 		chVal.setRestId(rs.getString("resID"));
+		chVal.setValueId(rs.getString("valueId"));
 		chVal.setChNum(rs.getString("chNum"));
 		chVal.setValueName(rs.getString("valueName"));
 		chVal.setValuePrice(rs.getFloat("valuePrice"));
