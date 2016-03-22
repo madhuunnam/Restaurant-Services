@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.services.dao.repository.CustomerRepository;
-import com.restaurant.services.model.Admin;
 import com.restaurant.services.model.Customer;
 
 @RestController
@@ -19,7 +18,8 @@ public class CustomerServiceController {
 	
 	@Autowired
 	CustomerRepository customerRepository;
-
+	
+	
 	@RequestMapping(value = "/signUpCustomer", method = RequestMethod.POST)
 	public ResponseEntity<String> registerCust(@RequestBody Customer cust) {
 
@@ -39,6 +39,7 @@ public class CustomerServiceController {
 		String customerUpdateStatus = "Customer Update Success!";
 		try {
 			customerRepository.updateCustomer(customer);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			customerUpdateStatus = "Customer Update Failed";

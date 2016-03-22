@@ -19,6 +19,8 @@ public class CustomerRepository {
 
 	@Autowired
 	NamedParameterJdbcTemplate namedParameterTemplate;
+	@Autowired
+	CustCreditRepository custCreditRepository;
 
 	private static final String INSERT_CUSTOMER_RECORDS = "INSERT INTO Customers(firstName, middleName, lastName, emailAddress, password, promoCode, adChannel, insertDate, "
 			+ "telephoneNumber, addrStNum, city, state, zip) "
@@ -50,10 +52,12 @@ public class CustomerRepository {
 
 		try {
 			namedParameterTemplate.update(UPDATE_CUSTOMER_RECORDS, paramMap);
+			
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			throw e;
 		}
+		custCreditRepository.updateCustCredit(customer.getCustCredit());
 	}
 
 	public Customer getCustomer(String custEmail) {
