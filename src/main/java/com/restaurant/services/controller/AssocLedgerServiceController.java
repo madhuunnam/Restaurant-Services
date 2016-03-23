@@ -32,15 +32,15 @@ public class AssocLedgerServiceController {
 		return new ResponseEntity<String>(AssocInsertStatus, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getAssocLedgerListForAssocomer/{AssocID}/{toDate}/{fromDate}", method = RequestMethod.GET, produces = "application/json")
-	public List<AssocLedger> getAssocLedgerListForAssocomer(@PathVariable("AssocID") String assocId,
+	@RequestMapping(value = "/getAssocLedgerListForAssociate/{AssocID}/{toDate}/{fromDate}", method = RequestMethod.GET, produces = "application/json")
+	public List<AssocLedger> getAssocLedgerListForAssociate(@PathVariable("AssocID") String assocId,
 			@PathVariable("toDate") String toDate, @PathVariable("fromDate") String fromDate) {
 
 		System.out.println("In AssocLedgerService");
 		String sqlStatus = "Sql Success!";
 		List<AssocLedger> aLedgers = null;
 		try {
-			aLedgers = assocLedgerRepository.getAssocLedgerListForAssocomer(assocId, toDate, fromDate);
+			aLedgers = assocLedgerRepository.getAssocLedgerListForAssociate(assocId, toDate, fromDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";

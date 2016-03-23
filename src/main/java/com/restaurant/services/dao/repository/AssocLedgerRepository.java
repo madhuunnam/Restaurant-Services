@@ -35,7 +35,7 @@ public class AssocLedgerRepository {
 		}
 	}
 
-	public List<AssocLedger> getAssocLedgerListForAssocomer(String assocId, String toDate, String fromDate) {
+	public List<AssocLedger> getAssocLedgerListForAssociate(String assocId, String toDate, String fromDate) {
 		String SQL = "SELECT * FROM AssocLedgers where assocID =:assocID and ledgerDate BETWEEN :toDate AND :fromDate ";
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
