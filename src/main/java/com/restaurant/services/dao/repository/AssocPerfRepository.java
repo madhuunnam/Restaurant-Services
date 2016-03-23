@@ -11,19 +11,17 @@ import org.springframework.stereotype.Component;
 
 import com.restaurant.services.dao.mapper.AssocPerfMapper;
 import com.restaurant.services.model.AssocPerf;
-import com.restaurant.services.model.CustCredit;
 
 @Component
 public class AssocPerfRepository {
 	@Autowired
 	NamedParameterJdbcTemplate namedParameterTemplate;
-	
+
 	private static final String INSERT_ASSOCPERF_RECORDS = "INSERT INTO AssocPerf(assocID, runStart, assocTitle, titleDate, downIDs, numCust, "
 			+ "numRes, personScore, teamScore) VALUES (:assocId,:runStart,:assocTitle,:titleDate,:downIDs,:numCust,:numRes,:personScore,:teamScore)";
 
 	private static final String UPDATE_ASSOCPERF_RECORDS = "UPDATE AssocPerf SET runStart=:runStart,assocTitle=:assocTitle,titleDate=:titleDate,downIDs=:downIDs,"
 			+ "numCust=:numCust,numRes=:numRes,personScore=:personScore,teamScore=:teamScore WHERE assocID=:assocId";
-		
 
 	public void addToAssocPerf(AssocPerf assocPerf, String assocId) {
 
@@ -40,21 +38,21 @@ public class AssocPerfRepository {
 	}
 
 	public AssocPerf getAssocPerf(String assocId) {
-		
+
 		String SQL = "SELECT * FROM AssocPerf WHERE assocID = :assocId ";
 
 		SqlParameterSource namedParameters = new MapSqlParameterSource("assocId", assocId);
 
 		AssocPerf assocPerf = (AssocPerf) namedParameterTemplate.queryForObject(SQL, namedParameters,
 				new AssocPerfMapper());
-		
+
 		return assocPerf;
 	}
 
 	private Map<String, Object> createParameterMap(AssocPerf assocPerf) {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
+
 		paramMap.put("runStart", assocPerf.getRunStart());
 		paramMap.put("assocTitle", assocPerf.getAssocTitle());
 		paramMap.put("titleDate", assocPerf.getTitleDate());
@@ -63,7 +61,7 @@ public class AssocPerfRepository {
 		paramMap.put("numRes", assocPerf.getNumRes());
 		paramMap.put("personScore", assocPerf.getPersonScore());
 		paramMap.put("teamScore", assocPerf.getTeamScore());
-		
+
 		return paramMap;
 	}
 }

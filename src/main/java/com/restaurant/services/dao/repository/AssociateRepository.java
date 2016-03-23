@@ -4,21 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import com.restaurant.services.dao.mapper.AssociateMapper;
-import com.restaurant.services.model.Admin;
 import com.restaurant.services.model.Associate;
-import com.restaurant.services.model.Customer;
 
 @Component
 public class AssociateRepository {
 
 	@Autowired
 	NamedParameterJdbcTemplate namedParameterTemplate;
+	@Autowired
+	AssocPerfRepository assocPerfRepository;
 
 	private static final String UPDATE_ASSOC_RECORDS = "UPDATE Associates SET leaveDate=:leaveDate,firstName=:firstName,"
 			+ "middleName=:middleName,lastName=:lastName,nickName=:nickName,telephoneNumber=:phone1,otherPhone=:phone2,"
@@ -43,11 +44,18 @@ public class AssociateRepository {
 
 		Map<String, Object> paramMap = createParameterMap(associate);
 
-		namedParameterTemplate.update(UPDATE_ASSOC_RECORDS, paramMap);
+		try {
+			namedParameterTemplate.update(UPDATE_ASSOC_RECORDS, paramMap);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			throw e;
+		}
+
+		assocPerfRepository.updateAssocPerf(associate.getAssocPerf());
 	}
 
 	public Associate getAssociate(String assocEmail) {
-		
+
 		String SQL = "SELECT * FROM Associates A, AssocPerf AP where emailAddress = :email and A.assocID = AP.assocID ";
 
 		SqlParameterSource namedParameters = new MapSqlParameterSource("email", assocEmail);
@@ -92,24 +100,24 @@ public class AssociateRepository {
 		paramMap.put("comType", associate.getComType());
 		paramMap.put("preTye", associate.getPreTye());
 		paramMap.put("chgDate", associate.getChgDate());
-		//paramMap.put("uplineId", associate.getUplineID());
-		if(associate.getUplineID() !=null && !associate.getUplineID().isEmpty()){
+		// paramMap.put("uplineId", associate.getUplineID());
+		if (associate.getUplineID() != null && !associate.getUplineID().isEmpty()) {
 			paramMap.put("uplineId", Integer.parseInt(associate.getUplineID()));
-		}else{
+		} else {
 			paramMap.put("uplineId", null);
 		}
 		paramMap.put("uplineName", associate.getUplineName());
-	//	paramMap.put("gparId", associate.getGparID());
-		if(associate.getGparID() !=null && !associate.getGparID().isEmpty()){
+		// paramMap.put("gparId", associate.getGparID());
+		if (associate.getGparID() != null && !associate.getGparID().isEmpty()) {
 			paramMap.put("gparId", Integer.parseInt(associate.getGparID()));
-		}else{
+		} else {
 			paramMap.put("gparId", null);
 		}
 		paramMap.put("gparName", associate.getGparName());
-		//paramMap.put("ggparID", associate.getGgparID());
-		if(associate.getGgparID() !=null && !associate.getGgparID().isEmpty()){
+		// paramMap.put("ggparID", associate.getGgparID());
+		if (associate.getGgparID() != null && !associate.getGgparID().isEmpty()) {
 			paramMap.put("ggparID", Integer.parseInt(associate.getGgparID()));
-		}else{
+		} else {
 			paramMap.put("ggparID", null);
 		}
 		paramMap.put("ggparName", associate.getGgparName());
