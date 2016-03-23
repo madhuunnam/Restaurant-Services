@@ -42,9 +42,9 @@ public class AssocLedgerRepository {
 		paramMap.put("assocID", assocId);
 		paramMap.put("toDate", toDate);
 		paramMap.put("fromDate", fromDate);
-		List<AssocLedger> cLedgers = (List<AssocLedger>) namedParameterTemplate.query(SQL, paramMap,
+		List<AssocLedger> aLedgers = (List<AssocLedger>) namedParameterTemplate.query(SQL, paramMap,
 				new AssocLedgerMapper());
-		return cLedgers;
+		return aLedgers;
 	}
 
 	private Map<String, Object> createParameterMap(AssocLedger aLedger) {

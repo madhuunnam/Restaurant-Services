@@ -32,8 +32,8 @@ public class AssocLedgerServiceController {
 		return new ResponseEntity<String>(AssocInsertStatus, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getAssocLedgerListForAssociate/{AssocID}/{toDate}/{fromDate}", method = RequestMethod.GET, produces = "application/json")
-	public List<AssocLedger> getAssocLedgerListForAssociate(@PathVariable("AssocID") String assocId,
+	@RequestMapping(value = "/getAssocLedgerListForAssociate/{assocID}/{toDate}/{fromDate}", method = RequestMethod.GET, produces = "application/json")
+	public List<AssocLedger> getAssocLedgerListForAssociate(@PathVariable("assocID") String assocId,
 			@PathVariable("toDate") String toDate, @PathVariable("fromDate") String fromDate) {
 
 		System.out.println("In AssocLedgerService");
