@@ -37,7 +37,7 @@ public class AdminLedgerRepository {
 	}
 
 	public List<AdminLedger> getAdminLedgerList(String toDate, String fromDate) {
-		String SQL = "SELECT * FROM AdminLedgers where ledgerDate BETWEEN :toDate AND :fromDate ";
+		String SQL = "SELECT * FROM AdminLedgers where ledgerDate BETWEEN :toDate AND :fromDate order by ledgerNum";
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
