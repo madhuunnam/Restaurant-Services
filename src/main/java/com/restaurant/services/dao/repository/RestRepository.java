@@ -84,7 +84,7 @@ public class RestRepository {
 
 	public Restaurant getRestaurantById(String restID) {
 
-		String SQL = "SELECT * from restaurants r," + "ResAdmin ra where r.resID = :restId and r.resID = ra.resID ";
+		String SQL = "SELECT * from Restaurants r," + "ResAdmin ra where r.resID = :restId and r.resID = ra.resID ";
 
 		SqlParameterSource namedParameters = new MapSqlParameterSource("restId", restID);
 
