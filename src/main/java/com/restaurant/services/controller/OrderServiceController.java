@@ -73,17 +73,18 @@ public class OrderServiceController {
 		return orders;
 	}
 
-	@RequestMapping(value = "/getOrderbyOrderNumForCustomer/{orderNo}/{custId}", method = RequestMethod.GET, produces = "application/json")
-	public Order getOrderbyOrderNumForCustomer(@PathVariable("orderNo") String orderNum,
-			@PathVariable("custId") String custId) {
+	@RequestMapping(value = "/getOrderbyOrderNumForCustomer/{custId}/{orderNo}", method = RequestMethod.GET, produces = "application/json")
+	public Order getOrderbyOrderNumForCustomer(@PathVariable("custId") String custId, @PathVariable("orderNo") String orderNum
+			) {
 		String sqlStatus = "Sql Success!";
 		Order order = null;
 		try {
-			order = orderRepository.getOrderbyOrderNumForCustomer(orderNum, custId);
+			order = orderRepository.getOrderbyOrderNumForCustomer(custId, orderNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";
 		}
+		System.out.println("getOrderByCustId"+order);
 		return order;
 	}
 

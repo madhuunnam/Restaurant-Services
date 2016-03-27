@@ -59,12 +59,13 @@ public class OrderRepository {
 		return ordersOfRestaurant;
 	}
 
-	public Order getOrderbyOrderNumForCustomer(String orderNo, String custId) {
-		String SQL = "SELECT * FROM Orders where orderNum = :orderNum and custId = :custId";
+	public Order getOrderbyOrderNumForCustomer(String custId, String orderNo) {
+		String SQL = "SELECT * FROM Orders where custId = :custId and orderNum = :orderNum ";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("orderNum", orderNo);
 		paramMap.put("custId", custId);
-		Order order = (Order) namedParameterTemplate.query(SQL, paramMap, new OrderMapper());
+		Order order = new Order();
+		order = (Order) namedParameterTemplate.queryForObject(SQL, paramMap, new OrderMapper());
 		return order;
 	}
 
@@ -73,7 +74,8 @@ public class OrderRepository {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("orderNum", orderNo);
 		paramMap.put("resID", restId);
-		Order order = (Order) namedParameterTemplate.query(SQL, paramMap, new OrderMapper());
+		Order order = new Order();
+		order = (Order) namedParameterTemplate.queryForObject(SQL, paramMap, new OrderMapper());
 		return order;
 	}
 
