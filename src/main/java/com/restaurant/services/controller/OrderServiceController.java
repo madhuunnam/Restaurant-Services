@@ -56,6 +56,7 @@ public class OrderServiceController {
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";
 		}
+		System.out.println("OrderList" +orders);
 		return orders;
 	}
 
