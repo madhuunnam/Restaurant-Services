@@ -58,6 +58,18 @@ public class ItemServiceController {
 		}
 		return items;
 	}
+	
+	@RequestMapping(value = "/getItemDetailsById/{restId}/{itemNum}", method = RequestMethod.GET, produces = "application/json")
+	public Item getItemDetailsById(@PathVariable("restId") String restId , @PathVariable("itemNum") String itemNum){
+		Item item= new Item();
+		try {
+			item = itemRepository.getItemDetailsById(restId, itemNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return item;
+	}
 
 	@RequestMapping(value = "/deleteItemFromRestaurant/{restaurantId}/{itemNum}", method = RequestMethod.GET)
 	public ResponseEntity<String> deleteItemFromRestaurant(@PathVariable("restaurantId") String restaurantId,

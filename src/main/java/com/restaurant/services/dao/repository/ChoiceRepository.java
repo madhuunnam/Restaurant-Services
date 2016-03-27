@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -29,16 +30,24 @@ public class ChoiceRepository {
 
 	public void addChoice(Choice choice) {
 
-		Map<String, Object> paramMap = createParameterMap(choice);
+		try {
+			Map<String, Object> paramMap = createParameterMap(choice);
 
-		namedParameterTemplate.update(INSERT_CHOICE_RECORDS, paramMap);
+			namedParameterTemplate.update(INSERT_CHOICE_RECORDS, paramMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void updateChoice(Choice choice) {
 
-		Map<String, Object> paramMap = createParameterMap(choice);
+		try {
+			Map<String, Object> paramMap = createParameterMap(choice);
 
-		namedParameterTemplate.update(UPDATE_CHOICE_RECORDS, paramMap);
+			namedParameterTemplate.update(UPDATE_CHOICE_RECORDS, paramMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<Choice> getChoiceListForItemOfRestaurant(String restId, String itemNum) {
@@ -60,12 +69,16 @@ public class ChoiceRepository {
 
 		String SQL = "DELETE FROM Choices where resID = :restId and itemNum =:itemNum and chNum =:chNum";
 
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("restId", restId);
-		paramMap.put("itemNum", itemNo);
-		paramMap.put("chNum", choiceNo);
+		try {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("restId", restId);
+			paramMap.put("itemNum", itemNo);
+			paramMap.put("chNum", choiceNo);
 
-		namedParameterTemplate.update(SQL, paramMap);
+			namedParameterTemplate.update(SQL, paramMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

@@ -92,7 +92,7 @@ public class CustomerRepository {
 
 	public Customer getCustomerById(String custId) {
 
-		String SQL = "SELECT * from customers c,"
+		String SQL = "SELECT * from Customers c,"
 				+ "credits cr where c.custID = :custId and c.custID = cr.custID ";
 
 		SqlParameterSource namedParameters = new MapSqlParameterSource("custId", custId);
