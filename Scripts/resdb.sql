@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Transactions;
 
 DROP TABLE IF EXISTS Associates;
+DROP TABLE IF EXISTS AssocPerf;
 DROP TABLE IF EXISTS Admins;
 DROP TABLE IF EXISTS ResReviews;
 DROP TABLE IF EXISTS SiteReviews;
@@ -392,7 +393,7 @@ CREATE TABLE IF NOT EXISTS `Orders` (
 	-- order detail
 	orderTime	datetime NOT NULL,
 	numberOfLines	int,
-	itemName	varchar(50),
+	itemName	varchar(50),	
 	subTot		float,
 	discountPercentage	float,
 	taxRatePercent	float,
@@ -576,7 +577,7 @@ CREATE TABLE IF NOT EXISTS ResLedgers (
 	orderNum	int references Orders,
 	resName		varchar(50),
 	ledgerNum	int,
-	ledgerDate	datetime,
+	ledgerDate	date,
 
 	custName	varchar(50),
 	chargeAmt	float,
@@ -599,7 +600,7 @@ CREATE TABLE IF NOT EXISTS AssocLedgers (
 	resID		int references Restaurants,
 	resName		varchar(50),
 	ledgerNum	int,
-	ledgerDate	datetime,
+	ledgerDate	date,
 	
 	comAmt		float,
 	
@@ -633,7 +634,7 @@ CREATE TABLE IF NOT EXISTS AdminLedgers (
 	
 	orderNum	int references Orders,
 	ledgerNum	int,
-	ledgerDate	datetime,
+	ledgerDate	date,
 
 	income		float,
 	inMethod	varchar(20),
@@ -677,5 +678,5 @@ CREATE TABLE IF NOT EXISTS ForSales(
 
 	
 -- -------------------------------------------------------	
-	
+
 
