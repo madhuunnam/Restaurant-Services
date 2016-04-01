@@ -24,11 +24,11 @@ public class RestRepository {
 			+ "hasMenu, telephoneNumber, otherPhone, addrStNum, city, state, zip, emailAddress, passwd, question, answer, website, "
 			+ "closedDays, delivery, deliBy, deliMin, deliFee, deliPolicy, deliRadius, deliZips, deliStreets, pickup, dineIn, reserve, "
 			+ "forKids, forGroup, parking, wifi, breakfast, lunch, dinner, lateNight, coupon, bankName, bankPhone, bankAddr, bankRouteNum, "
-			+ "bankAccNum, mgrName, mgrPhone, mgrEmail, mgrPasswd) "
+			+ "bankAccNum, mgrName, mgrPhone, mgrEmail, mgrPasswd,latitude,longitude) "
 			+ "VALUES (:restName,:altName,:year,:categories,:insertDate,:hasMenu,:phone1,:phone2,:stAddress,:city,:state,:zip,:email,:password,"
 			+ ":question,:ans,:website,:closedDays,:delivery,:deliBy,:deliMin,:deliFee,:deliPolicy,:deliRadius,:deliZips,:deliStreets,"
 			+ ":pickUp,:dineIn,:reserve,:forKids,:forGroup,:parking,:wifi,:breakfast,:lunch,:dinner,:lateNight,:coupon,:bankName,:bankPhone,"
-			+ ":bankAddr,:bankRouteNum,:bankAccNum,:mgrName,:mgrPhone,:mgrEmail,:mgrPasswd)";
+			+ ":bankAddr,:bankRouteNum,:bankAccNum,:mgrName,:mgrPhone,:mgrEmail,:mgrPasswd,:latitude,:longitude)";
 
 	private static final String UPDATE_RESTAURANT_RECORDS = "UPDATE Restaurants SET resName=:restName,altName=:altName,foundYear=:year,"
 			+ "categories=:categories,cancelDate=:cancelDate,hasMenu=:hasMenu,inputBy=:inputBy,note=:note,telephoneNumber=:phone1,"
