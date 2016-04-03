@@ -1,5 +1,6 @@
 package com.restaurant.services.dao.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.restaurant.services.dao.mapper.OrderMapper;
+import com.restaurant.services.model.Choice;
+import com.restaurant.services.model.LineItem;
 import com.restaurant.services.model.Order;
 
 @Component
@@ -17,6 +20,9 @@ public class OrderRepository {
 
 	@Autowired
 	NamedParameterJdbcTemplate namedParameterTemplate;
+	
+	@Autowired
+	LineItemRepository lineItemRepository;
 
 	private static final String INSERT_ORDER_RECORDS = "INSERT INTO Orders(resID, orderNum, custId, custName, resName, orderType, orderTime, numberOfLines, "
 			+ "itemName, subTot, discountPercentage, taxRatePercent, taxAmount, tip, deliFee, totPrice, receiverName, deliAddr, status, msgToCust, msgToRes, "
@@ -35,6 +41,18 @@ public class OrderRepository {
 		Map<String, Object> paramMap = createParameterMap(order);
 
 		namedParameterTemplate.update(INSERT_ORDER_RECORDS, paramMap);
+		
+		String orderNum = getNewOrderIdToInsert(order.getRestId());
+		
+		int lineItemCounter = 1;
+		for (LineItem item : order.getLineItems()) {
+
+			item.setOrderNo(orderNum);
+			item.setRestId(order.getRestId());
+			item.setLineNum(String.valueOf(lineItemCounter++));
+			
+			lineItemRepository.addLineItem(item);
+		}
 	}
 
 	public void updateOrder(Order order) {
