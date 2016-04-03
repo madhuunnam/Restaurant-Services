@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -77,6 +78,19 @@ public class OrderRepository {
 		Order order = new Order();
 		order = (Order) namedParameterTemplate.queryForObject(SQL, paramMap, new OrderMapper());
 		return order;
+	}
+	
+	public String getNewOrderIdToInsert(String restId) {
+
+		String SQL = "SELECT max(orderNum) as orderID FROM Orders where resID = ? ";
+		String orderId = "";
+		try {
+			orderId = namedParameterTemplate.getJdbcOperations().queryForObject(SQL, new Object[] { restId }, String.class);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return orderId;
 	}
 
 	private Map<String, Object> createParameterMap(Order order) {

@@ -30,6 +30,7 @@ public class OrderServiceController {
 			e.printStackTrace();
 			insertStatus = "Order SetUp Failed";
 		}
+		System.out.println("Service Status"+insertStatus);
 		return new ResponseEntity<String>(insertStatus, HttpStatus.OK);
 	}
 
@@ -100,6 +101,20 @@ public class OrderServiceController {
 			sqlStatus = "Sql failed ";
 		}
 		return order;
+	}
+	
+	@RequestMapping(value = "/getNewOrderIdToInsert/{restId}", method = RequestMethod.GET, produces = "application/json")
+	public String getNewOrderIdToInsert(@PathVariable("restId") String restId) {
+		
+		String sqlStatus = "Sql Success!";
+		String orderId="";
+		try {
+			orderId = orderRepository.getNewOrderIdToInsert(restId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return orderId;
 	}
 
 }
