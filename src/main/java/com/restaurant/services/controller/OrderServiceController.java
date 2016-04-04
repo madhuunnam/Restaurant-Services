@@ -116,5 +116,17 @@ public class OrderServiceController {
 		}
 		return orderId;
 	}
+	
+	@RequestMapping(value = "/deleteOrderForRestaurant/{restaurantId}/{orderNo}", method = RequestMethod.GET)
+	public ResponseEntity<String> deleteOrderForRestaurant(@PathVariable("restaurantId") String restaurant, @PathVariable("orderNo") String orderNum) {
+		String sqlStatus = "Sql Success!";
+		try {
+			orderRepository.deleteOrderForRestaurant(restaurant, orderNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return new ResponseEntity<String>(sqlStatus, HttpStatus.OK);
+	}
 
 }

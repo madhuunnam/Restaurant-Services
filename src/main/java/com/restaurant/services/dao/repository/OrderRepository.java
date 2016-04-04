@@ -111,6 +111,18 @@ public class OrderRepository {
 		return orderId;
 	}
 
+	public void deleteOrderForRestaurant(String restId, String orderNo) {
+
+		String SQL = "DELETE FROM Orders where resID = :restId and orderNum = :orderNo";
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("restId", restId);
+		paramMap.put("orderNo", orderNo);
+		
+		namedParameterTemplate.update(SQL, paramMap);
+
+	}
+	
 	private Map<String, Object> createParameterMap(Order order) {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
