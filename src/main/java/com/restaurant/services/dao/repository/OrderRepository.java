@@ -34,7 +34,7 @@ public class OrderRepository {
 			+ "subTot=:subTot,discountPercentage=:discountPercentage,taxRatePercent=:taxRatePercent,taxAmount=:taxAmount,tip=:tip,deliFee=:deliFee,"
 			+ "totPrice=:totPrice,receiverName=:receiverName,deliAddr=:deliAddr,status=:status,msgToCust=:msgToCust,msgToRes=:msgToRes,nonSmoke=:nonSmoke,"
 			+ "resTable=:resTable,resPeople=:resPeople,resTime=:resTime,pickTime=:pickTime,arriveTime=:arriveTime,agentName=:agentName,notes=:notes WHERE resID = :restId"
-			+ "and orderNum = :orderNo";
+			+ " and orderNum = :orderNo";
 
 	public void addOrder(Order order) {
 
@@ -92,7 +92,7 @@ public class OrderRepository {
 		String SQL = "SELECT * FROM Orders where orderNum = :orderNum and resID=:restId";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("orderNum", orderNo);
-		paramMap.put("resID", restId);
+		paramMap.put("restId", restId);
 		Order order = new Order();
 		order = (Order) namedParameterTemplate.queryForObject(SQL, paramMap, new OrderMapper());
 		return order;

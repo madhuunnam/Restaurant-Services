@@ -27,7 +27,6 @@ public class TransactionServiceController {
 			e.printStackTrace();
 			insertStatus = "Transaction SetUp Failed";
 		}
-		System.out.println("Transaction Service Status"+insertStatus);
 		return new ResponseEntity<String>(insertStatus, HttpStatus.OK);
 	}
 	

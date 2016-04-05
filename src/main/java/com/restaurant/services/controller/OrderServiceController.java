@@ -30,7 +30,6 @@ public class OrderServiceController {
 			e.printStackTrace();
 			insertStatus = "Order SetUp Failed";
 		}
-		System.out.println("Service Status"+insertStatus);
 		return new ResponseEntity<String>(insertStatus, HttpStatus.OK);
 	}
 
@@ -85,7 +84,6 @@ public class OrderServiceController {
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";
 		}
-		System.out.println("getOrderByCustId"+order);
 		return order;
 	}
 
