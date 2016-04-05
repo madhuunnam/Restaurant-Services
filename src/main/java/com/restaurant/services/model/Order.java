@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Order {
 	
 	private String orderNo;
@@ -31,6 +35,8 @@ public class Order {
 	private Boolean nonSmoke;
 	private String resTable;
 	private Byte resPeople;
+	
+	@JsonFormat(pattern = "HH:mm:ss")
 	private Date resTime;
 	private Date pickTime;
 	private Date arriveTime;

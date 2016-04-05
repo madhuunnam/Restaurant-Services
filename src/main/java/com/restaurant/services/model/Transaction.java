@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Transaction {
 	
 	private String OrderNo;
@@ -33,6 +35,8 @@ public class Transaction {
 	private Boolean paySeperate;
 	private String resTable;
 	private Byte resPeople;
+	
+	@JsonFormat(pattern = "HH:mm:ss")
 	private Date resTime;
 	private Date pickTime;
 	private Date arriveTime;

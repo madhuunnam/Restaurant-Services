@@ -36,7 +36,7 @@ public class TransactionMapper implements RowMapper {
 		or.setNonSmoke(rs.getBoolean("nonSmoke"));
 		or.setResTable(rs.getString("resTable"));
 		or.setResPeople(rs.getByte("resPeople"));
-		or.setResTime(rs.getDate("resTime"));
+		or.setResTime(rs.getTime("resTime"));
 		or.setPickTime(rs.getDate("pickTime"));
 		or.setArriveTime(rs.getDate("arriveTime"));
 		or.setAgentName(rs.getString("agentName"));
