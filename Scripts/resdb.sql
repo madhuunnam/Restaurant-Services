@@ -446,7 +446,7 @@ CREATE TABLE IF NOT EXISTS `Transactions` (
 	deliAddr	varchar(300),
 	status		varchar(30),
 	msgToCust	text,
-	msgToStore	text,
+	msgToRes	text,
 	nonSmoke	boolean,
 	groupOrder	boolean,
 	paySeperate	boolean,
@@ -678,5 +678,4 @@ CREATE TABLE IF NOT EXISTS ForSales(
 
 	
 -- -------------------------------------------------------	
-
 
