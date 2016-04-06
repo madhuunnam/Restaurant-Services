@@ -101,13 +101,13 @@ public class OrderServiceController {
 		return order;
 	}
 	
-	@RequestMapping(value = "/getNewOrderIdToInsert/{restId}", method = RequestMethod.GET, produces = "application/json")
-	public String getNewOrderIdToInsert(@PathVariable("restId") String restId) {
+	@RequestMapping(value = "/getNewOrderIdToInsert", method = RequestMethod.GET, produces = "application/json")
+	public String getNewOrderIdToInsert() {
 		
 		String sqlStatus = "Sql Success!";
 		String orderId="";
 		try {
-			orderId = orderRepository.getNewOrderIdToInsert(restId);
+			orderId = orderRepository.getNewOrderIdToInsert();
 		} catch (Exception e) {
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";

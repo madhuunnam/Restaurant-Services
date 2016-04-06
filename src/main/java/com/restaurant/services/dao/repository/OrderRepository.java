@@ -42,7 +42,7 @@ public class OrderRepository {
 
 		namedParameterTemplate.update(INSERT_ORDER_RECORDS, paramMap);
 		
-		String orderNum = getNewOrderIdToInsert(order.getRestId());
+		String orderNum = getNewOrderIdToInsert();
 		
 		int lineItemCounter = 1;
 		for (LineItem item : order.getLineItems()) {
@@ -98,12 +98,12 @@ public class OrderRepository {
 		return order;
 	}
 	
-	public String getNewOrderIdToInsert(String restId) {
+	public String getNewOrderIdToInsert() {
 
-		String SQL = "SELECT max(orderNum) as orderID FROM Orders where resID = ? ";
+		String SQL = "SELECT max(orderNum) as orderID FROM Orders  ";
 		String orderId = "";
 		try {
-			orderId = namedParameterTemplate.getJdbcOperations().queryForObject(SQL, new Object[] { restId }, String.class);
+			orderId = namedParameterTemplate.getJdbcOperations().queryForObject(SQL, String.class);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			return null;
