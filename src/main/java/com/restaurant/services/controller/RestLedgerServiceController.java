@@ -47,5 +47,19 @@ public class RestLedgerServiceController {
 		System.out.println(rLedgers);
 		return rLedgers;
 	}
+	
+	@RequestMapping(value = "/getMaxRestLedgerId", method = RequestMethod.GET, produces = "application/json")
+	public String getMaxRestLedgerId() {
+		
+		String sqlStatus = "Sql Success!";
+		String restLedgerId="";
+		try {
+			restLedgerId = restLedgerRepository.getMaxRestLedgerId();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return restLedgerId;
+	}
 
 }

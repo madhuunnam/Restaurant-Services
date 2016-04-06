@@ -45,6 +45,19 @@ public class CustLedgerRepository {
 				new CustLedgerMapper());
 		return cLedgers;
 	}
+	
+	public String getMaxCustLedgerId() {
+
+		String SQL = "SELECT max(ledgerNum) FROM CustLedgers ";
+		String custLedgerId = "";
+		try {
+			custLedgerId = namedParameterTemplate.getJdbcOperations().queryForObject(SQL, String.class);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return custLedgerId;
+	}
 
 	private Map<String, Object> createParameterMap(CustLedger cLedger) {
 

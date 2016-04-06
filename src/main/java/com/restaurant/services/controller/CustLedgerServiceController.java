@@ -47,5 +47,20 @@ public class CustLedgerServiceController {
 		System.out.println(cLedgers);
 		return cLedgers;
 	}
+	
+	@RequestMapping(value = "/getMaxCustLedgerId", method = RequestMethod.GET, produces = "application/json")
+	public String getMaxCustLedgerId() {
+		
+		String sqlStatus = "Sql Success!";
+		String custLedgerId="";
+		try {
+			custLedgerId = custLedgerRepository.getMaxCustLedgerId();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return custLedgerId;
+	}
+	
 
 }

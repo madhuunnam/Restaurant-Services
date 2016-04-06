@@ -46,6 +46,19 @@ public class RestLedgerRepository {
 		return rLedgers;
 	}
 
+	public String getMaxRestLedgerId() {
+
+		String SQL = "SELECT max(ledgerNum) FROM ResLedgers ";
+		String restLedgerId = "";
+		try {
+			restLedgerId = namedParameterTemplate.getJdbcOperations().queryForObject(SQL, String.class);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return restLedgerId;
+	}
+
 	private Map<String, Object> createParameterMap(RestLedger rLedger) {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
