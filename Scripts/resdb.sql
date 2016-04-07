@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS Restaurants (
 	resName		varchar(50) NOT NULL,
 	altName		varchar(50),
 	foundYear	year,
-	categories	varchar(100) NOT NULL,
+	categories	varchar(100),
 	insertDate	datetime NOT NULL,
 	cancelDate	datetime,
 	hasMenu		varchar(5),
@@ -109,7 +109,10 @@ CREATE TABLE IF NOT EXISTS Restaurants (
   	mgrName		varchar(50),
   	mgrPhone	varchar(20),
   	mgrEmail	varchar(100),
-	mgrPasswd	varchar(30)
+	mgrPasswd	varchar(30),
+
+	promoCode	varchar(10),
+	adChannel	varchar(30)
 	
 );
 
@@ -143,8 +146,6 @@ CREATE TABLE IF NOT EXISTS ResAdmin (
 	recomenderID	int,
 	recomType	varchar(15),
 	commissionType	varchar(10),
-	promoCode	varchar(10),
-	adChannel	varchar(30),
 	numCust		int,
 	numRes		int
 	
