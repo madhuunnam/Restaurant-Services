@@ -20,14 +20,14 @@ public class RestAdminRepository {
 	NamedParameterJdbcTemplate namedParameterTemplate;
 	
 	private static final String INSERT_RESTADMIN_RECORDS = "INSERT INTO ResAdmin(resID, sales, numOrders, popularity, likes, "
-			+ "dislikes, numRev, avgStar, numYelp, yelpStar, priceRange, recomenderID, recomType, commissionType, promoCode, "
-			+ "adChannel, numCust, numRes) VALUES (:restId,:sales,:numOrders,:popularity,:likes,:dislikes,:numRev,:avgStar,"
-			+ ":numYelp,:yelpStar,:priceRange,:recomenderID,:recomType,:commissionType,:promoCode,:adChannel,:numCust,:numRes)";
+			+ "dislikes, numRev, avgStar, numYelp, yelpStar, priceRange, recomenderID, recomType, commissionType, "
+			+ "numCust, numRes) VALUES (:restId,:sales,:numOrders,:popularity,:likes,:dislikes,:numRev,:avgStar,"
+			+ ":numYelp,:yelpStar,:priceRange,:recomenderID,:recomType,:commissionType,:numCust,:numRes)";
 
 	private static final String UPDATE_RESTADMIN_RECORDS = "UPDATE ResAdmin SET sales=:sales,numOrders=:numOrders,"
 			+ "popularity=:popularity,likes=:likes,dislikes=:dislikes,numRev=:numRev,avgStar=:avgStar,numYelp=:numYelp,"
 			+ "yelpStar=:yelpStar,priceRange=:priceRange,recomenderID=:recomenderID,recomType=:recomType,commissionType=:commissionType,"
-			+ "promoCode=:promoCode,adChannel=:adChannel,numCust=:numCust,numRes=:numRes WHERE resID = :restId";
+			+ "numCust=:numCust,numRes=:numRes WHERE resID = :restId";
 	
 	public void addToRestAdmin(RestAdmin restAdmin,String restId) {
 
@@ -70,8 +70,6 @@ private Map<String, Object> createParameterMap(RestAdmin restAdmin) {
 		paramMap.put("recomenderID", restAdmin.getRecomenderID());
 		paramMap.put("recomType", restAdmin.getRecomType());
 		paramMap.put("commissionType", restAdmin.getCommissionType());
-		paramMap.put("promoCode", restAdmin.getPromoCode());
-		paramMap.put("adChannel", restAdmin.getAdChannel());
 		paramMap.put("numCust", restAdmin.getNumCust());
 		paramMap.put("numRes", restAdmin.getNumRes());
 		

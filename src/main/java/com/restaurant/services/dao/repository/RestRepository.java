@@ -24,11 +24,11 @@ public class RestRepository {
 			+ "hasMenu, telephoneNumber, otherPhone, addrStNum, city, state, zip, emailAddress, passwd, question, answer, website, "
 			+ "closedDays, delivery, deliBy, deliMin, deliFee, deliPolicy, deliRadius, deliZips, deliStreets, pickup, dineIn, reserve, "
 			+ "forKids, forGroup, parking, wifi, breakfast, lunch, dinner, lateNight, coupon, bankName, bankPhone, bankAddr, bankRouteNum, "
-			+ "bankAccNum, mgrName, mgrPhone, mgrEmail, mgrPasswd,latitude,longitude) "
+			+ "bankAccNum, mgrName, mgrPhone, mgrEmail, mgrPasswd,latitude,longitude,promoCode,adChannel) "
 			+ "VALUES (:restName,:altName,:year,:categories,:insertDate,:hasMenu,:phone1,:phone2,:stAddress,:city,:state,:zip,:email,:password,"
 			+ ":question,:ans,:website,:closedDays,:delivery,:deliBy,:deliMin,:deliFee,:deliPolicy,:deliRadius,:deliZips,:deliStreets,"
 			+ ":pickUp,:dineIn,:reserve,:forKids,:forGroup,:parking,:wifi,:breakfast,:lunch,:dinner,:lateNight,:coupon,:bankName,:bankPhone,"
-			+ ":bankAddr,:bankRouteNum,:bankAccNum,:mgrName,:mgrPhone,:mgrEmail,:mgrPasswd,:latitude,:longitude)";
+			+ ":bankAddr,:bankRouteNum,:bankAccNum,:mgrName,:mgrPhone,:mgrEmail,:mgrPasswd,:latitude,:longitude,:promoCode,:adChannel)";
 
 	private static final String UPDATE_RESTAURANT_RECORDS = "UPDATE Restaurants SET resName=:restName,altName=:altName,foundYear=:year,"
 			+ "categories=:categories,cancelDate=:cancelDate,hasMenu=:hasMenu,inputBy=:inputBy,note=:note,telephoneNumber=:phone1,"
@@ -40,7 +40,7 @@ public class RestRepository {
 			+ "deliZips=:deliZips,deliStreets=:deliStreets,pickup=:pickUp,dineIn=:dineIn,reserve=:reserve,forKids=:forKids,"
 			+ "forGroup=:forGroup,parking=:parking,wifi=:wifi,breakfast=:breakfast,lunch=:lunch,dinner=:dinner,"
 			+ "lateNight=:lateNight,coupon=:coupon,bankName=:bankName,bankPhone=:bankPhone,bankAddr=:bankAddr,bankRouteNum=:bankRouteNum,"
-			+ "bankAccNum=:bankAccNum,mgrName=:mgrName,mgrPhone=:mgrPhone,mgrEmail=:mgrEmail,mgrPasswd=:mgrPasswd WHERE resID=:restId";
+			+ "bankAccNum=:bankAccNum,mgrName=:mgrName,mgrPhone=:mgrPhone,mgrEmail=:mgrEmail,mgrPasswd=:mgrPasswd,promoCode=:promoCode,adChannel=:adChannel WHERE resID=:restId";
 
 	public void registerRest(Restaurant rest) {
 
@@ -193,6 +193,9 @@ public class RestRepository {
 		paramMap.put("mgrPhone", rest.getMgrPhone());
 		paramMap.put("mgrEmail", rest.getMgrEmail());
 		paramMap.put("mgrPasswd", rest.getMgrPasswd());
+		
+		paramMap.put("promoCode", rest.getPromoCode());
+		paramMap.put("adChannel", rest.getAdChannel());
 
 		return paramMap;
 	}

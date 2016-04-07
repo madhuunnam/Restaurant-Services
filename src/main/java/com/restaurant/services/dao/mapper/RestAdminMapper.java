@@ -27,8 +27,6 @@ public class RestAdminMapper implements RowMapper{
 		ra.setRecomenderID(rs.getInt("recomenderID"));
 		ra.setRecomType(rs.getString("recomType"));
 		ra.setCommissionType(rs.getString("commissionType"));
-		ra.setPromoCode(rs.getString("promoCode"));
-		ra.setAdChannel(rs.getString("adChannel"));
 		ra.setNumCust(rs.getInt("numCust"));
 		ra.setNumRes(rs.getInt("numRes"));
 		

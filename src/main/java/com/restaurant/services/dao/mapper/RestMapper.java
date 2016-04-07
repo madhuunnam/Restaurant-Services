@@ -88,6 +88,9 @@ public Restaurant mapRow(ResultSet rs, int rowNum) throws SQLException {
 		rest.setMgrEmail(rs.getString("mgrEmail"));
 		rest.setMgrPasswd(rs.getString("mgrPasswd"));
 		
+		rest.setPromoCode(rs.getString("promoCode"));
+		rest.setAdChannel(rs.getString("adChannel"));
+		
 		rest.getRestAdmin().setSales(rs.getFloat("sales"));
 		rest.getRestAdmin().setNumOrders(rs.getInt("numOrders"));
 		rest.getRestAdmin().setPopularity(rs.getFloat("popularity"));
@@ -101,10 +104,10 @@ public Restaurant mapRow(ResultSet rs, int rowNum) throws SQLException {
 		rest.getRestAdmin().setRecomenderID(rs.getInt("recomenderID"));
 		rest.getRestAdmin().setRecomType(rs.getString("recomType"));
 		rest.getRestAdmin().setCommissionType(rs.getString("commissionType"));
-		rest.getRestAdmin().setPromoCode(rs.getString("promoCode"));
-		rest.getRestAdmin().setAdChannel(rs.getString("adChannel"));
 		rest.getRestAdmin().setNumCust(rs.getInt("numCust"));
 		rest.getRestAdmin().setNumRes(rs.getInt("numRes"));
+		
+		
 		
 		return rest;
 	} 
