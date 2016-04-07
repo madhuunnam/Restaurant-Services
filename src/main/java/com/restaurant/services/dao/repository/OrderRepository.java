@@ -63,7 +63,7 @@ public class OrderRepository {
 	}
 
 	public List<Order> getOrderListForCustomer(String custId) {
-		String SQL = "SELECT * FROM Orders where custId = :custID";
+		String SQL = "SELECT * FROM Orders where custId = :custID and status != 'Inactive'";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("custID", custId);
 		List<Order> ordersOfCustomer = (List<Order>) namedParameterTemplate.query(SQL, paramMap, new OrderMapper());
@@ -71,7 +71,7 @@ public class OrderRepository {
 	}
 
 	public List<Order> getOrderListForRestaurant(String restId) {
-		String SQL = "SELECT * FROM Orders where resID = :restId";
+		String SQL = "SELECT * FROM Orders where resID = :restId and status != 'Inactive'";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
 		List<Order> ordersOfRestaurant = (List<Order>) namedParameterTemplate.query(SQL, paramMap, new OrderMapper());
