@@ -85,6 +85,8 @@ public class OrderRepository {
 		paramMap.put("custId", custId);
 		Order order = new Order();
 		order = (Order) namedParameterTemplate.queryForObject(SQL, paramMap, new OrderMapper());
+		
+		order.setLineItems(lineItemRepository.getLineItemsForRestaurantOrder(order.getRestId(), orderNo));
 		return order;
 	}
 
