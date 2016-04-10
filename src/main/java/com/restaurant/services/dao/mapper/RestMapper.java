@@ -62,7 +62,7 @@ public class RestMapper implements RowMapper {
 
 		rest.setDelivery(rs.getString("delivery"));
 		rest.setDeliBy(rs.getString("deliBy"));
-		rest.setDeliFee(rs.getString("deliMin"));
+		rest.setDeliMin(rs.getString("deliMin"));
 		rest.setDeliFee(rs.getString("deliFee"));
 		rest.setDeliPolicy(rs.getString("deliPolicy"));
 		rest.setDeliRadius(rs.getString("deliRadius"));

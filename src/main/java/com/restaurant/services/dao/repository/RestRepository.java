@@ -150,7 +150,7 @@ public class RestRepository {
 		// paramMap.put("deliMin", rest.getDeliMin());
 
 		if (rest.getDeliMin() != null && !rest.getDeliMin().isEmpty()) {
-			paramMap.put("deliMin", Integer.parseInt(rest.getDeliMin()));
+			paramMap.put("deliMin", Float.parseFloat(rest.getDeliMin()));
 		} else {
 			paramMap.put("deliMin", null);
 		}
