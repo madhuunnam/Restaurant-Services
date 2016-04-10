@@ -21,7 +21,7 @@ public class Application {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                	.allowedOrigins("*","http://localhost:8080")
+                	.allowedOrigins("*","http://localhost:8080","http://ada.uncg.edu:8080")
                 	.allowedMethods("PUT", "DELETE","GET","POST");
             }
         };
