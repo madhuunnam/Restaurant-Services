@@ -156,7 +156,7 @@ public class RestRepository {
 		}
 		// paramMap.put("deliFee", rest.getDeliFee());
 		if (rest.getDeliFee() != null && !rest.getDeliFee().isEmpty()) {
-			paramMap.put("deliFee", Integer.parseInt(rest.getDeliFee()));
+			paramMap.put("deliFee", Float.parseFloat(rest.getDeliFee()));
 		} else {
 			paramMap.put("deliFee", null);
 		}
