@@ -634,7 +634,6 @@ CREATE TABLE IF NOT EXISTS AdminLedgers (
 	assocName	varchar(50),
 	
 	orderNum	int references Orders,
-	ledgerNum	int,
 	ledgerDate	date,
 
 	income		float,
@@ -678,5 +677,4 @@ CREATE TABLE IF NOT EXISTS ForSales(
 );
 
 	
--- -------------------------------------------------------	
 
