@@ -19,9 +19,9 @@ public class AdminLedgerRepository {
 	NamedParameterJdbcTemplate namedParameterTemplate;
 
 	private static final String INSERT_ADMINLEDGER_RECORDS = "INSERT INTO AdminLedgers(ledgerID, custID, custName, resID, "
-			+ "resName, assocID, assocName, orderNum, ledgerNum, ledgerDate, income, inMethod, inNote, expense, exMethod, "
+			+ "resName, assocID, assocName, orderNum, ledgerDate, income, inMethod, inNote, expense, exMethod, "
 			+ "exNote, note, balance) VALUES (:ledgerID,:custID,:custName,:resID,:resName,:assocID,:assocName,"
-			+ ":orderNum,:ledgerNum,:ledgerDate,:income,:inMethod,:inNote,:expense,:exMethod,:exNote,:note,"
+			+ ":orderNum,:ledgerDate,:income,:inMethod,:inNote,:expense,:exMethod,:exNote,:note,"
 			+ ":balance)";
 
 	public void addToAdminLedger(AdminLedger aLedger) {
@@ -37,7 +37,7 @@ public class AdminLedgerRepository {
 	}
 
 	public List<AdminLedger> getAdminLedgerList(String toDate, String fromDate) {
-		String SQL = "SELECT * FROM AdminLedgers where ledgerDate BETWEEN :toDate AND :fromDate order by ledgerNum";
+		String SQL = "SELECT * FROM AdminLedgers where ledgerDate BETWEEN :toDate AND :fromDate order by ledgerID";
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
@@ -61,7 +61,6 @@ public class AdminLedgerRepository {
 		paramMap.put("assocID", aLedger.getAssocId());
 		paramMap.put("assocName", aLedger.getAssocName());
 		paramMap.put("orderNum", aLedger.getOrderNum());
-		paramMap.put("ledgerNum", aLedger.getLedgerNum());
 		paramMap.put("ledgerDate", aLedger.getLedgerDate());
 		paramMap.put("income", aLedger.getIncome());
 		paramMap.put("inMethod", aLedger.getInMethod());

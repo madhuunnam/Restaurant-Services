@@ -21,7 +21,6 @@ public class AdminLedgerMapper implements RowMapper {
 		al.setResId(rs.getString("resID"));
 		al.setResName(rs.getString("resName"));
 		al.setOrderNum(rs.getString("orderNum"));
-		al.setLedgerNum(rs.getString("ledgerNum"));
 		al.setLedgerDate(rs.getDate("ledgerDate"));
 
 		al.setIncome(rs.getFloat("income"));
