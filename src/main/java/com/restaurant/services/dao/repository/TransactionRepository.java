@@ -1,6 +1,7 @@
 package com.restaurant.services.dao.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.restaurant.services.dao.mapper.TransactionMapper;
 import com.restaurant.services.model.Transaction;
 
 @Component
@@ -153,7 +155,34 @@ public class TransactionRepository {
 		return noOfOrders;
 	}
 	
-	
+	public List<Transaction> getPickUpOrderList(String restId) {
+		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='PickUp' ";
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("restId", restId);
+		List<Transaction> pickUpOrdersOfRestaurant = (List<Transaction>) namedParameterTemplate.query(SQL, paramMap, new TransactionMapper());
+		return pickUpOrdersOfRestaurant;
+	}
+	public List<Transaction> getDeliveryOrderList(String restId) {
+		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='Delivery' ";
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("restId", restId);
+		List<Transaction> pickUpOrdersOfRestaurant = (List<Transaction>) namedParameterTemplate.query(SQL, paramMap, new TransactionMapper());
+		return pickUpOrdersOfRestaurant;
+	}
+	public List<Transaction> getReservationOrderList(String restId) {
+		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='Reservation' ";
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("restId", restId);
+		List<Transaction> pickUpOrdersOfRestaurant = (List<Transaction>) namedParameterTemplate.query(SQL, paramMap, new TransactionMapper());
+		return pickUpOrdersOfRestaurant;
+	}
+	public List<Transaction> getTotalOrderList(String restId) {
+		String SQL = "SELECT * FROM Transactions where resID = :restId ";
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("restId", restId);
+		List<Transaction> pickUpOrdersOfRestaurant = (List<Transaction>) namedParameterTemplate.query(SQL, paramMap, new TransactionMapper());
+		return pickUpOrdersOfRestaurant;
+	}
 
 	private Map<String, Object> createParameterMap(Transaction order) {
 

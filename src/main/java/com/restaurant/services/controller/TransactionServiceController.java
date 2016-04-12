@@ -1,5 +1,7 @@
 package com.restaurant.services.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.services.dao.repository.TransactionRepository;
+import com.restaurant.services.model.Order;
 import com.restaurant.services.model.Transaction;
 
 @RestController
@@ -140,6 +143,59 @@ public class TransactionServiceController {
 			sqlStatus = "Sql failed ";
 		}
 		return noOfOrders;
+	}
+	
+	@RequestMapping(value = "/getPickUpOrderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
+	public List<Transaction> getPickUpOrderList(@PathVariable("restaurantId") String restId) {
+		
+		String sqlStatus = "Sql Success!";
+		List<Transaction> transactions = null;
+		try {
+			transactions = transactionRepository.getPickUpOrderList(restId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return transactions;
+	}
+	@RequestMapping(value = "/getDeliveryOrderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
+	public List<Transaction> getDeliveryOrderList(@PathVariable("restaurantId") String restId) {
+		
+		String sqlStatus = "Sql Success!";
+		List<Transaction> transactions = null;
+		try {
+			transactions = transactionRepository.getDeliveryOrderList(restId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return transactions;
+	}
+	@RequestMapping(value = "/getReservationOrderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
+	public List<Transaction> getReservationOrderList(@PathVariable("restaurantId") String restId) {
+		
+		String sqlStatus = "Sql Success!";
+		List<Transaction> transactions = null;
+		try {
+			transactions = transactionRepository.getReservationOrderList(restId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return transactions;
+	}
+	@RequestMapping(value = "/getTotalOrderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
+	public List<Transaction> getTotalOrderList(@PathVariable("restaurantId") String restId) {
+		
+		String sqlStatus = "Sql Success!";
+		List<Transaction> transactions = null;
+		try {
+			transactions = transactionRepository.getTotalOrderList(restId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlStatus = "Sql failed ";
+		}
+		return transactions;
 	}
 	
 
