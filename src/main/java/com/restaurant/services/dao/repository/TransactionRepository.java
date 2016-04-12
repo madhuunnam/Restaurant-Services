@@ -1,5 +1,6 @@
 package com.restaurant.services.dao.repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,14 +25,14 @@ public class TransactionRepository {
 			+ ":orderType,:orderTime,:numberOfLines,:itemName,:subTot,:discountPercentage,:taxRatePercent,:taxAmount,:tip,:deliFee,:totPrice,:receiverName,:deliAddr,"
 			+ ":status,:msgToCust,:msgToRes,:nonSmoke,:resTable,:resPeople,:resTime,:pickTime,:arriveTime,:agentName,:notes)";
 
-	private static final String PICKUP_TRANSACTIONS_SUM = "SELECT ROUND(sum(totPrice),2) from Transactions where orderType = 'PickUp' and resID=:restId";
-	private static final String PICKUP_TRANSACTIONS_COUNT = "SELECT count(*) from Transactions where orderType = 'PickUp' and resID=:restId";
-	private static final String DELIVERY_TRANSACTIONS_SUM = "SELECT ROUND(sum(totPrice),2) from Transactions where orderType = 'Delivery' and resID=:restId";
-	private static final String DELIVERY_TRANSACTIONS_COUNT = "SELECT count(*) from Transactions where orderType = 'Delivery' and resID=:restId";
-	private static final String RESERVATION_TRANSACTIONS_SUM = "SELECT ROUND(sum(totPrice),2) from Transactions where orderType = 'Reservation' and resID=:restId";
-	private static final String RESERVATION_TRANSACTIONS_COUNT = "SELECT count(*) from Transactions where orderType = 'Reservation' and resID=:restId";
-	private static final String TOTAL_TRANSACTIONS_SUM = "SELECT ROUND(sum(totPrice),2) from Transactions where resID=:restId";
-	private static final String TOTAL_TRANSACTIONS_COUNT = "SELECT count(*) from Transactions where resID=:restId";
+	private static final String PICKUP_TRANSACTIONS_SUM = "SELECT ROUND(sum(totPrice),2) from Transactions where orderType = 'PickUp' and resID=:restId and orderTime BETWEEN :fromDate AND :toDate";
+	private static final String PICKUP_TRANSACTIONS_COUNT = "SELECT count(*) from Transactions where orderType = 'PickUp' and resID=:restId and orderTime BETWEEN :fromDate AND :toDate";
+	private static final String DELIVERY_TRANSACTIONS_SUM = "SELECT ROUND(sum(totPrice),2) from Transactions where orderType = 'Delivery' and resID=:restId and orderTime BETWEEN :fromDate AND :toDate";
+	private static final String DELIVERY_TRANSACTIONS_COUNT = "SELECT count(*) from Transactions where orderType = 'Delivery' and resID=:restId and orderTime BETWEEN :fromDate AND :toDate";
+	private static final String RESERVATION_TRANSACTIONS_SUM = "SELECT ROUND(sum(totPrice),2) from Transactions where orderType = 'Reservation' and resID=:restId and orderTime BETWEEN :fromDate AND :toDate";
+	private static final String RESERVATION_TRANSACTIONS_COUNT = "SELECT count(*) from Transactions where orderType = 'Reservation' and resID=:restId and orderTime BETWEEN :fromDate AND :toDate";
+	private static final String TOTAL_TRANSACTIONS_SUM = "SELECT ROUND(sum(totPrice),2) from Transactions where resID=:restId and orderTime BETWEEN :fromDate AND :toDate";
+	private static final String TOTAL_TRANSACTIONS_COUNT = "SELECT count(*) from Transactions where resID=:restId and orderTime BETWEEN :fromDate AND :toDate";
 	
 	
 
@@ -43,11 +44,13 @@ public class TransactionRepository {
 
 	}
 	
-	public String getPickUpOrdersTotalPrice(String restId) {
-
+	public String getPickUpOrdersTotalPrice(String restId, String toDate, String fromDate) {
+		
 		String pickUpSum = "";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		try {
 			 
 			pickUpSum = namedParameterTemplate.queryForObject(PICKUP_TRANSACTIONS_SUM, paramMap, String.class);
@@ -57,11 +60,13 @@ public class TransactionRepository {
 		}
 		return pickUpSum;
 	}
-	public String getNumberOfPickUpOrders(String restId) {
+	public String getNumberOfPickUpOrders(String restId, String toDate, String fromDate) {
 
 		String noOfpickUpOrders = "";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		try {
 			noOfpickUpOrders = namedParameterTemplate.queryForObject(PICKUP_TRANSACTIONS_COUNT, paramMap, String.class);
 		} catch (DataAccessException e) {
@@ -71,11 +76,13 @@ public class TransactionRepository {
 		return noOfpickUpOrders;
 	}
 	
-	public String getDeliveryOrdersTotalPrice(String restId) {
+	public String getDeliveryOrdersTotalPrice(String restId, String toDate, String fromDate) {
 
 		String deliverySum = "";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		try {
 			 
 			deliverySum = namedParameterTemplate.queryForObject(DELIVERY_TRANSACTIONS_SUM, paramMap, String.class);
@@ -85,11 +92,13 @@ public class TransactionRepository {
 		}
 		return deliverySum;
 	}
-	public String getNumberOfDeliveryOrders(String restId) {
+	public String getNumberOfDeliveryOrders(String restId, String toDate, String fromDate) {
 
 		String noOfdeliveryOrders = "";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		try {
 			noOfdeliveryOrders = namedParameterTemplate.queryForObject(DELIVERY_TRANSACTIONS_COUNT, paramMap, String.class);
 		} catch (DataAccessException e) {
@@ -99,11 +108,13 @@ public class TransactionRepository {
 		return noOfdeliveryOrders;
 	}
 	
-	public String getReservationOrdersTotalPrice(String restId) {
+	public String getReservationOrdersTotalPrice(String restId, String toDate, String fromDate) {
 
 		String reservationSum = "";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		try {
 			 
 			reservationSum = namedParameterTemplate.queryForObject(RESERVATION_TRANSACTIONS_SUM, paramMap, String.class);
@@ -113,11 +124,13 @@ public class TransactionRepository {
 		}
 		return reservationSum;
 	}
-	public String getNumberOfReservationOrders(String restId) {
+	public String getNumberOfReservationOrders(String restId, String toDate, String fromDate) {
 
 		String noOfReservationOrders = "";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		try {
 			noOfReservationOrders = namedParameterTemplate.queryForObject(RESERVATION_TRANSACTIONS_COUNT, paramMap, String.class);
 		} catch (DataAccessException e) {
@@ -127,11 +140,13 @@ public class TransactionRepository {
 		return noOfReservationOrders;
 	}
 	
-	public String getOrdersTotalPrice(String restId) {
+	public String getOrdersTotalPrice(String restId, String toDate, String fromDate) {
 
 		String totalSum = "";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		try {
 			 
 			totalSum = namedParameterTemplate.queryForObject(TOTAL_TRANSACTIONS_SUM, paramMap, String.class);
@@ -141,11 +156,13 @@ public class TransactionRepository {
 		}
 		return totalSum;
 	}
-	public String getNumberOfOrders(String restId) {
+	public String getNumberOfOrders(String restId, String toDate, String fromDate) {
 
 		String noOfOrders = "";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		try {
 			noOfOrders = namedParameterTemplate.queryForObject(TOTAL_TRANSACTIONS_COUNT, paramMap, String.class);
 		} catch (DataAccessException e) {
@@ -155,31 +172,39 @@ public class TransactionRepository {
 		return noOfOrders;
 	}
 	
-	public List<Transaction> getPickUpOrderList(String restId) {
-		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='PickUp' ";
+	public List<Transaction> getPickUpOrderList(String restId, String toDate, String fromDate) {
+		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='PickUp' and orderTime BETWEEN :fromDate AND :toDate";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		List<Transaction> pickUpOrdersOfRestaurant = (List<Transaction>) namedParameterTemplate.query(SQL, paramMap, new TransactionMapper());
 		return pickUpOrdersOfRestaurant;
 	}
-	public List<Transaction> getDeliveryOrderList(String restId) {
-		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='Delivery' ";
+	public List<Transaction> getDeliveryOrderList(String restId, String toDate, String fromDate) {
+		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='Delivery' and orderTime BETWEEN :fromDate AND :toDate";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		List<Transaction> pickUpOrdersOfRestaurant = (List<Transaction>) namedParameterTemplate.query(SQL, paramMap, new TransactionMapper());
 		return pickUpOrdersOfRestaurant;
 	}
-	public List<Transaction> getReservationOrderList(String restId) {
-		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='Reservation' ";
+	public List<Transaction> getReservationOrderList(String restId, String toDate, String fromDate) {
+		String SQL = "SELECT * FROM Transactions where resID = :restId and orderType='Reservation' and orderTime BETWEEN :fromDate AND :toDate";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		List<Transaction> pickUpOrdersOfRestaurant = (List<Transaction>) namedParameterTemplate.query(SQL, paramMap, new TransactionMapper());
 		return pickUpOrdersOfRestaurant;
 	}
-	public List<Transaction> getTotalOrderList(String restId) {
-		String SQL = "SELECT * FROM Transactions where resID = :restId ";
+	public List<Transaction> getTotalOrderList(String restId, String toDate, String fromDate) {
+		String SQL = "SELECT * FROM Transactions where resID = :restId and orderTime BETWEEN :fromDate AND :toDate";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("restId", restId);
+		paramMap.put("toDate", toDate);
+		paramMap.put("fromDate", fromDate);
 		List<Transaction> pickUpOrdersOfRestaurant = (List<Transaction>) namedParameterTemplate.query(SQL, paramMap, new TransactionMapper());
 		return pickUpOrdersOfRestaurant;
 	}
