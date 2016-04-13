@@ -29,8 +29,8 @@ public class AdminStatisticsRepository {
 		String deliTotalSQL = "SELECT ROUND(sum(totPrice),2) FROM Transactions where orderType='Delivery'";
 		String noOfPickUpOrdersSQL = "SELECT count(*) from Transactions where orderType='PickUp'";
 		String pickUpTotalSQL = "SELECT ROUND(sum(totPrice),2) FROM Transactions where orderType='PickUp'";
-		String noOfReserveOrdersSQL = "SELECT count(*) from Transactions where orderType='Reservations'";
-		String ReserveTotalSQL = "SELECT ROUND(sum(totPrice),2) FROM Transactions where orderType='Reservations'";
+		String noOfReserveOrdersSQL = "SELECT count(*) from Transactions where orderType='Reservation'";
+		String ReserveTotalSQL = "SELECT ROUND(sum(totPrice),2) FROM Transactions where orderType='Reservation'";
 		String totalOrdersSQL ="SELECT count(*) from Transactions";
 		String totalAmtSQL ="SELECT ROUND(sum(totPrice),2) FROM Transactions";
 		String totalAssocMembersSQL = "SELECT count(*) from Associates";
