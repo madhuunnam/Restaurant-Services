@@ -81,6 +81,7 @@ public class RestaurantServiceController {
 		try {
 			restaurant = restRepository.getRestaurant(restaurantEmail);
 		} catch (Exception e) {
+			restaurant= null;
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";
 		}

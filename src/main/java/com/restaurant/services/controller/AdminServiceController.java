@@ -49,6 +49,7 @@ public class AdminServiceController {
 		try {
 			admin = adminRepository.getAdmin(adminEmail);
 		} catch (Exception e) {
+			admin=null;
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";
 		}

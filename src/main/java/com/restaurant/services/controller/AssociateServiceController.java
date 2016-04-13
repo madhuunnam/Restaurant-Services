@@ -50,6 +50,7 @@ public class AssociateServiceController {
 		try {
 			associate = assocRepository.getAssociate(assocEmail);
 		} catch (Exception e) {
+			associate = null;
 			e.printStackTrace();
 			sqlStatus = "Sql failed ";
 		}
